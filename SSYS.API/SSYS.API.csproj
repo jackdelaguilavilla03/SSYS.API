@@ -7,7 +7,38 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3"/>
+        <PackageReference Include="AutoMapper" Version="12.0.0" />
+        <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
+        <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
+        <PackageReference Include="EntityFramework" Version="6.4.4" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.10" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.0-rc.2.22472.11" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="7.0.0-rc.2.22472.11" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Relational.Design" Version="2.0.0-preview1-final" />
+        <PackageReference Include="MySql.EntityFrameworkCore" Version="7.0.0-preview5" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+        <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="6.4.0" />
+        <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.24.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="CRM" />
+      <Folder Include="HCM" />
+      <Folder Include="IAM\Authorization\Attributes" />
+      <Folder Include="IAM\Authorization\Handlers" />
+      <Folder Include="IAM\Authorization\Middleware" />
+      <Folder Include="IAM\Controllers" />
+      <Folder Include="IAM\Domain" />
+      <Folder Include="IAM\Exceptions" />
+      <Folder Include="IAM\Mapping" />
+      <Folder Include="IAM\Persistence" />
+      <Folder Include="IAM\Resources" />
+      <Folder Include="IAM\Services" />
+      <Folder Include="Profiles" />
+      <Folder Include="SCM" />
+      <Folder Include="Shared" />
+      <Folder Include="Social" />
+      <Folder Include="Subscriptions" />
     </ItemGroup>
 
 </Project>
