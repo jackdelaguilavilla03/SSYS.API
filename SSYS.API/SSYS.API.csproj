@@ -24,16 +24,6 @@
     <ItemGroup>
       <Folder Include="CRM" />
       <Folder Include="HCM" />
-      <Folder Include="IAM\Authorization\Attributes" />
-      <Folder Include="IAM\Authorization\Handlers" />
-      <Folder Include="IAM\Authorization\Middleware" />
-      <Folder Include="IAM\Controllers" />
-      <Folder Include="IAM\Domain" />
-      <Folder Include="IAM\Exceptions" />
-      <Folder Include="IAM\Mapping" />
-      <Folder Include="IAM\Persistence" />
-      <Folder Include="IAM\Resources" />
-      <Folder Include="IAM\Services" />
       <Folder Include="Profiles\Domain\Repositories" />
       <Folder Include="Profiles\Domain\Services" />
       <Folder Include="SCM" />
