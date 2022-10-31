@@ -26,7 +26,7 @@
       <Folder Include="HCM" />
       <Folder Include="Profiles\Domain\Repositories" />
       <Folder Include="Profiles\Domain\Services" />
-      <Folder Include="SCM" />
+      <Folder Include="Shared\Services" />
       <Folder Include="Social" />
       <Folder Include="Subscriptions" />
     </ItemGroup>
