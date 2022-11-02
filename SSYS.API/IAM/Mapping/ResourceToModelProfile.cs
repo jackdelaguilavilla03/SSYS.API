@@ -23,6 +23,6 @@ public class ResourceToModelProfile : Profile
                 }
             )
         );
-        CreateMap<SaveProductResource, Product>();
+        
     }
 }

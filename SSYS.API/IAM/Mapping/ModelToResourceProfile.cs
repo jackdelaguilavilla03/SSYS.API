@@ -15,6 +15,5 @@ public class ModelToResourceProfile : Profile
         CreateMap<User, UserResource>();
         CreateMap<MainUser, AuthenticateResponse>();
         CreateMap<MainUser, MainUserResource>();
-        CreateMap<Product, ProductResource>();
     }
 }
