@@ -14,7 +14,7 @@ public class AppDbContext : DbContext
     public Microsoft.EntityFrameworkCore.DbSet<MainUser> MainUsers { get; set; }
     public Microsoft.EntityFrameworkCore.DbSet<User> Users { get; set; }
     
-    public System.Data.Entity.DbSet<Product> Products { get; set; }//1
+    public Microsoft.EntityFrameworkCore.DbSet<Product> Products { get; set; }//1
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -45,6 +45,7 @@ public class AppDbContext : DbContext
         builder.Entity<Product>().Property(p => p.Amount);
         builder.Entity<Product>().Property(p => p.Price).IsRequired();
         builder.Entity<Product>().Property(p => p.Date).IsRequired();
+        
     }
 
 }
