@@ -50,7 +50,9 @@ public class ProductService: IProductService
             return new ProductResponse("Category not found.");
 
         existingProduct.Title = product.Title;
-
+        existingProduct.Amount = product.Amount;
+        existingProduct.Price = product.Price;
+        existingProduct.IdCategory = product.IdCategory;
         try
         {
             _productRepository.Update(existingProduct);
@@ -82,5 +84,10 @@ public class ProductService: IProductService
         {
             return new ProductResponse($"An error occurred while deleting the category: {e.Message}");
         }
+    }
+
+    public Task<IEnumerable<Product>> FindByProductPriceAsync(int price)
+    {
+        throw new NotImplementedException();
     }
 }

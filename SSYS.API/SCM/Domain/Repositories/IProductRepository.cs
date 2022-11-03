@@ -9,4 +9,5 @@ public interface IProductRepository
     Task<Product> FindByIdAsync(int id);
     void Update(Product product);
     void Remove(Product product);
+    Task<IEnumerable<Product>> FindByProductPriceAsync(int price);
 }

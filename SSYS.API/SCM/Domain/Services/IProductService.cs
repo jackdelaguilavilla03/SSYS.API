@@ -10,4 +10,5 @@ public interface IProductService
     Task<ProductResponse> SaveAsync(Product product);
     Task<ProductResponse> UpdateAsync(int productId, Product product);
     Task<ProductResponse> DeleteAsync(int productId);
+    Task<IEnumerable<Product>> FindByProductPriceAsync(int price);
 }

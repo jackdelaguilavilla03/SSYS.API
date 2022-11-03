@@ -45,7 +45,8 @@ public class AppDbContext : DbContext
         builder.Entity<Product>().Property(p => p.Amount);
         builder.Entity<Product>().Property(p => p.Price).IsRequired();
         builder.Entity<Product>().Property(p => p.Date).IsRequired();
-        
+        builder.Entity<Product>().Property(p => p.IdCategory);
+
     }
 
 }

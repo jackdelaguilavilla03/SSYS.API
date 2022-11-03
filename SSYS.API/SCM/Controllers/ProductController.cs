@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Net.Mime;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using SSYS.API.SCM.Domain.Models;
 using SSYS.API.SCM.Domain.Services;
@@ -8,6 +9,7 @@ namespace SSYS.API.SCM.Controllers;
 
 [ApiController]
 [Route("/api/v1/[controller]")]
+[Produces(MediaTypeNames.Application.Json)]
 public class ProductController:ControllerBase
 {
    private readonly IProductService _productService;
