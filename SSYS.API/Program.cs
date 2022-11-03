@@ -2,6 +2,13 @@ using Microsoft.OpenApi.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using SSYS.API.IAM.Authorization.Settings;
+using SSYS.API.SCM.Domain.Repositories;
+using SSYS.API.SCM.Domain.Services;
+using SSYS.API.SCM.Mapping;
+using SSYS.API.SCM.Persistence;
+using SSYS.API.Shared.Domain.Repositories;
+using SSYS.API.Shared.Persistence.Contexts;
+using SSYS.API.Shared.Persistence.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,9 +20,29 @@ builder.Services.AddEndpointsApiExplorer();
 // AppSetting Configuration
 builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
 // Sawgger Configuration
-builder.Services.AddSwaggerGen(Options =>
+
+
+var connectionsString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<AppDbContext>(
+    options => options.UseMySQL(connectionsString)
+        .LogTo(Console.WriteLine, LogLevel.Information)
+        .EnableSensitiveDataLogging()
+        .EnableDetailedErrors()
+);
+
+builder.Services.AddRouting(options => options.LowercaseUrls = true);
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<ICategoryService, ICategoryService>();
+
+builder.Services.AddAutoMapper(
+    typeof(SSYS.API.SCM.Mapping.ModelToResourceCategory),
+    typeof(SSYS.API.SCM.Mapping.ResourceToModelCategory)
+);
+
+builder.Services.AddSwaggerGen(options =>
 {
-    Options.SwaggerDoc("v1", new OpenApiInfo
+    options.SwaggerDoc("v1", new OpenApiInfo
     {
         Version = "v1",
         Title = "SSYS API",
