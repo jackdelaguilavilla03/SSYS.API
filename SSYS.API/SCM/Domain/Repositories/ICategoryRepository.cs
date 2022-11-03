@@ -10,4 +10,5 @@ public interface ICategoryRepository
     void Update(Category category);
     void Remove(Category category);
     Task<IEnumerable<Category>> FindByCategoryTitleAsync(string title);
+    Task<IEnumerable<Category>> ListByCategoryIdAsync(int id);
 }

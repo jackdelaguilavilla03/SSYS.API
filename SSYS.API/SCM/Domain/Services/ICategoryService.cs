@@ -6,8 +6,10 @@ namespace SSYS.API.SCM.Domain.Services;
 public interface ICategoryService
 {
     Task<IEnumerable<Category>> ListAsync();
-    Task<IEnumerable<Category>> ListByCategoryIdAsync(int product);
+    Task<IEnumerable<Category>> ListByCategoryIdAsync(int id);
     Task<CategoryResponse> SaveAsync(Category category);
     Task<CategoryResponse> UpdateAsync(int categoryId, Category category);
-    Task<CategoryResponse> DeleteAsync(int categoryId); 
+    Task<CategoryResponse> DeleteAsync(int categoryId);
+    Task<IEnumerable<Category>> FindByCategoryTitleAsync(string title);
+    
 }
