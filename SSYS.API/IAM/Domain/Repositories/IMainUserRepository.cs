@@ -4,9 +4,9 @@ namespace SSYS.API.IAM.Domain.Repositories;
 
 public interface IMainUserRepository
 {
-    Task<IEnumerable<MainUser>> ListAsync();
-    Task AddAsync(MainUser mainUser);
-    Task<MainUser> FindByIdAsync(int id);
-    void Update(MainUser mainUser);
-    void Remove(MainUser mainUser);
+    Task<IEnumerable<Account>> ListAsync();
+    Task AddAsync(Account account);
+    Task<Account> FindByIdAsync(int id);
+    void Update(Account account);
+    void Remove(Account account);
 }

@@ -4,12 +4,8 @@ using SSYS.API.Shared.Domain.Model;
 
 namespace SSYS.API.IAM.Domain.Models;
 
-public class MainUser : BaseModel
+public class Account : BaseModel
 {
-    public string Username { get; set; }
-    [JsonIgnore]
-    public string Password { get; set; }
-    
     // Relationship
     public UserInformation UserInformation { get; set; }
     public BussinessInformation BussinessInformation { get; set; }

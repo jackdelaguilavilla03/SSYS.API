@@ -1,7 +1,6 @@
 using System.Net;
 using System.Net.Mime;
 using System.Text.Json;
-using Microsoft.AspNetCore.Mvc.Formatters;
 using SSYS.API.IAM.Exceptions;
 
 namespace SSYS.API.IAM.Authorization.Middleware;
@@ -27,10 +26,10 @@ public class ErrorHandlerMiddleware
             response.ContentType = MediaTypeNames.Application.Json;
             switch (error)
             {
-                case AppException e:
+                case AppException:
                     response.StatusCode = (int)HttpStatusCode.BadRequest;
                     break;
-                case KeyNotFoundException e:
+                case KeyNotFoundException:
                     response.StatusCode = (int)HttpStatusCode.NotFound;
                     break;
                 default:

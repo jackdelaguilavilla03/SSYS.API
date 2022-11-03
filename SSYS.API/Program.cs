@@ -1,6 +1,4 @@
 using Microsoft.OpenApi.Models;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 using SSYS.API.IAM.Authorization.Settings;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,10 +10,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 // AppSetting Configuration
 builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
-// Sawgger Configuration
-builder.Services.AddSwaggerGen(Options =>
+// Swagger Configuration
+builder.Services.AddSwaggerGen(options =>
 {
-    Options.SwaggerDoc("v1", new OpenApiInfo
+    options.SwaggerDoc("v1", new OpenApiInfo
     {
         Version = "v1",
         Title = "SSYS API",

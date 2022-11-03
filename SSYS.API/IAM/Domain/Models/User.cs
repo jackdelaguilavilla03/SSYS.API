@@ -12,8 +12,7 @@ public class User : BaseModel
     public Status UserStatus { get; set; }
     
     // Relationship
-    public int MainUserId { get; set; }
-    public MainUser MainUser { get; set; }
+    public int AccountId { get; set; }
+    public Account Account { get; set; }
     public ICollection<UserRole> UserRoles { get; set; }
-    public string UserName { get; set; }
 }

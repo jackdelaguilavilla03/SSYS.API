@@ -4,8 +4,8 @@ using SSYS.API.IAM.Domain.Models;
 
 namespace SSYS.API.IAM.Authorization.Attributes;
 
-[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = true)]
-public class AuthorizeAttribute
+[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
+public class AuthorizeAttribute : Attribute, IAuthorizationFilter
 {
     public void OnAuthorization(AuthorizationFilterContext context)
     {
@@ -17,7 +17,7 @@ public class AuthorizeAttribute
             return;
         }
         
-        var user = (User)context.HttpContext.Items["User"];
+        var user = (User)context.HttpContext.Items["User"]!;
         if (user == null)
         {
             context.Result = new JsonResult(new { message = "Unauthorized" }) 

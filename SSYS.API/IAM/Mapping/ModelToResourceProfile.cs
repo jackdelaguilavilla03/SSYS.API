@@ -13,7 +13,7 @@ public class ModelToResourceProfile : Profile
     {
         CreateMap<User, AuthenticateResponse>(0);
         CreateMap<User, UserResource>();
-        CreateMap<MainUser, AuthenticateResponse>();
-        CreateMap<MainUser, MainUserResource>();
+        CreateMap<Account, AuthenticateResponse>();
+        CreateMap<Account, MainUserResource>();
     }
 }

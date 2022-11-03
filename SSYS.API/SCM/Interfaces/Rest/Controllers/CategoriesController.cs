@@ -1,23 +1,21 @@
 ﻿using System.Net.Mime;
-using System.Security.Permissions;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using SSYS.API.SCM.Domain.Models;
 using SSYS.API.SCM.Domain.Services;
 using SSYS.API.SCM.Resources;
 
-namespace SSYS.API.SCM.Controllers;
+namespace SSYS.API.SCM.Interfaces.Rest.Controllers;
 
 [ApiController]
 [Route("/api/v1/[controller]")]
 [Produces(MediaTypeNames.Application.Json)]
-public class CategoryController: ControllerBase
+public class CategoriesController: ControllerBase
 {
     private readonly ICategoryService _categoryService;
     private readonly IMapper _mapper;
 
-    public CategoryController(ICategoryService categoryService, IMapper mapper)
+    public CategoriesController(ICategoryService categoryService, IMapper mapper)
     {
         _categoryService = categoryService;
         _mapper = mapper;

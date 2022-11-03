@@ -11,7 +11,7 @@ public class AppDbContext : DbContext
     public AppDbContext(DbContextOptions options) : base(options)
     {
     }
-    public Microsoft.EntityFrameworkCore.DbSet<MainUser> MainUsers { get; set; }
+    public Microsoft.EntityFrameworkCore.DbSet<Account> MainUsers { get; set; }
     public Microsoft.EntityFrameworkCore.DbSet<User> Users { get; set; }
     
     public Microsoft.EntityFrameworkCore.DbSet<Product> Products { get; set; }//1
@@ -20,17 +20,17 @@ public class AppDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder builder)
     {
         // Relationships
-        builder.Entity<MainUser>()
+        builder.Entity<Account>()
             .HasMany(u => u.Users)
-            .WithOne(u => u.MainUser)
-            .HasForeignKey(u => u.MainUserId)
+            .WithOne(u => u.Account)
+            .HasForeignKey(u => u.AccountId)
             .OnDelete(DeleteBehavior.Cascade);
 
         //Main User
-        builder.Entity<MainUser>().ToTable("MainUsers");
-        builder.Entity<MainUser>().HasKey(p => p.Id);
-        builder.Entity<MainUser>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
-        builder.Entity<MainUser>().Property(p => p.Username).IsRequired().HasMaxLength(100);
+        builder.Entity<Account>().ToTable("MainUsers");
+        builder.Entity<Account>().HasKey(p => p.Id);
+        builder.Entity<Account>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
+        builder.Entity<Account>().Property(p => p.Users).IsRequired().HasMaxLength(100);
 
         //User
         builder.Entity<User>().ToTable("Users");
