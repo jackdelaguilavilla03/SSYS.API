@@ -49,13 +49,13 @@ public class CategoryRepository: BaseRepository, ICategoryRepository
             .ToListAsync();
     }
 
-    public Task<IEnumerable<Category>> ListByCategoryIdAsync(int id)
-    {
-        throw new NotImplementedException();
-    }
+    //public Task<IEnumerable<Category>> ListByCategoryIdAsync(int id)
+//    {
+  //      throw new NotImplementedException();
+    //}
 
-    public async Task<Category> FindByCategoryIdAsync(int id)
-    {
-        return await _context.Categories.FindAsync(id);
-    }
+//    public async Task<Category> FindByCategoryIdAsync(int id)
+  //  {
+    //    return await _context.Categories.FindAsync(id);
+//    }
 }

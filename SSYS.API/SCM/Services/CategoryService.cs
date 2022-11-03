@@ -22,10 +22,10 @@ public class CategoryService: ICategoryService
         return await _categoryRepository.ListAsync();
     }
 
-    public async Task<IEnumerable<Category>> ListByCategoryIdAsync(int id)
-    {
-        return await _categoryRepository.ListByCategoryIdAsync(id);
-    }
+    //public async Task<IEnumerable<Category>> ListByCategoryIdAsync(int id)
+//    {
+        //return await _categoryRepository.ListByCategoryIdAsync(id);
+  //  }
 
     public async Task<CategoryResponse> SaveAsync(Category category)
     {
@@ -108,8 +108,8 @@ public class CategoryService: ICategoryService
         return await _categoryRepository.FindByCategoryTitleAsync(title);
     }
 
-    public async Task<Category> FindByCategoryIdAsync(int id)
-    {
-        return await _categoryRepository.FindByCategoryIdAsync(id);
-    }
+    //public async Task<Category> FindByCategoryIdAsync(int id)
+//    {
+  //      return await _categoryRepository.FindByCategoryIdAsync(id);
+    //}
 }
