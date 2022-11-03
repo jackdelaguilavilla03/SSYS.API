@@ -11,5 +11,5 @@ public interface ICategoryService
     Task<CategoryResponse> UpdateAsync(int categoryId, Category category);
     Task<CategoryResponse> DeleteAsync(int categoryId);
     Task<IEnumerable<Category>> FindByCategoryTitleAsync(string title);
-    
+    Task<IEnumerable<Category>> FindByCategoryIdAsync(int id);
 }

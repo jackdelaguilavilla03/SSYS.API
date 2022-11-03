@@ -107,4 +107,9 @@ public class CategoryService: ICategoryService
     {
         return await _categoryRepository.FindByCategoryTitleAsync(title);
     }
+
+    public async Task<Category> FindByCategoryIdAsync(int id)
+    {
+        return await _categoryRepository.FindByCategoryIdAsync(id);
+    }
 }
