@@ -15,6 +15,7 @@ public class AppDbContext : DbContext
     public Microsoft.EntityFrameworkCore.DbSet<User> Users { get; set; }
     
     public Microsoft.EntityFrameworkCore.DbSet<Product> Products { get; set; }//1
+    public Microsoft.EntityFrameworkCore.DbSet<Category> Categories { get; set; }//2
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -37,7 +38,7 @@ public class AppDbContext : DbContext
         builder.Entity<User>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
         builder.Entity<User>().Property(p => p.Username).IsRequired().HasMaxLength(100);
 
-        //relationships-> con category
+        //Product
         builder.Entity<Product>().ToTable("Products");
         builder.Entity<Product>().HasKey(p => p.Id);
         builder.Entity<Product>().Property(p => p.Title).IsRequired();
@@ -46,6 +47,13 @@ public class AppDbContext : DbContext
         builder.Entity<Product>().Property(p => p.Price).IsRequired();
         builder.Entity<Product>().Property(p => p.Date).IsRequired();
         builder.Entity<Product>().Property(p => p.IdCategory);
+        
+        //Category
+        builder.Entity<Category>().ToTable("Categories");
+        builder.Entity<Category>().HasKey(c=>c.Id);
+        builder.Entity<Category>().Property(c => c.Id).IsRequired();
+        builder.Entity<Category>().Property(c => c.Title).IsRequired();
+        builder.Entity<Category>().Property(c => c.Description);
 
     }
 
