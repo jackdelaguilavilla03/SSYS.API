@@ -1,5 +1,6 @@
 using System.Data.Entity;
 using Microsoft.EntityFrameworkCore;
+using SSYS.API.HCM.Domain.Models;
 using SSYS.API.IAM.Domain.Models;
 using SSYS.API.SCM.Domain.Models;
 using DbContext = Microsoft.EntityFrameworkCore.DbContext;
@@ -16,6 +17,8 @@ public class AppDbContext : DbContext
     
     public Microsoft.EntityFrameworkCore.DbSet<Product> Products { get; set; }//1
     public Microsoft.EntityFrameworkCore.DbSet<Category> Categories { get; set; }//2
+    
+    public Microsoft.EntityFrameworkCore.DbSet<Employee> Employees { get; set; }//2
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -54,6 +57,14 @@ public class AppDbContext : DbContext
         builder.Entity<Category>().Property(c => c.Id).IsRequired();
         builder.Entity<Category>().Property(c => c.Title).IsRequired();
         builder.Entity<Category>().Property(c => c.Description);
+        
+        //Employee
+        builder.Entity<Employee>().ToTable("Employees");
+        builder.Entity<Employee>().HasKey(p => p.Id);
+        builder.Entity<Employee>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
+        builder.Entity<Employee>().Property(p => p.Name).IsRequired().HasMaxLength(30);
+        builder.Entity<Employee>().Property(p => p.LastName).IsRequired().HasMaxLength(30);
+        builder.Entity<Employee>().Property(p => p.Phone).IsRequired().HasMaxLength(9);
 
     }
 

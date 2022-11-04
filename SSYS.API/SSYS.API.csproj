@@ -23,7 +23,8 @@
 
     <ItemGroup>
       <Folder Include="CRM" />
-      <Folder Include="HCM" />
+      <Folder Include="HCM\Interfaces\Internal" />
+      <Folder Include="HCM\Interfaces\Rest" />
       <Folder Include="Profiles\Domain\Repositories" />
       <Folder Include="Profiles\Domain\Services" />
       <Folder Include="Shared\Services" />
