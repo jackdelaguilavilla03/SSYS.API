@@ -45,7 +45,8 @@ public class ProductsController : ControllerBase
 
       return Created(nameof(PostAsync), productResource);
    }
-   
+  
+   [HttpPut("{id}")]
    public async Task<IActionResult> PutAsync(int id, [FromBody] SaveProductResource resource)
    {
       if (!ModelState.IsValid)

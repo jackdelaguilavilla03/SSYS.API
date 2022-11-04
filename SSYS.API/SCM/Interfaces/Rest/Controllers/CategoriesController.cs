@@ -46,6 +46,7 @@ public class CategoriesController: ControllerBase
         return Created(nameof(PostAsync), categoryResource);
     }
 
+    [HttpPut("{id}")]
     public async Task<IActionResult> PutAsync(int id, [FromBody] SaveCategoryResource resource)
     {
         if (!ModelState.IsValid)
