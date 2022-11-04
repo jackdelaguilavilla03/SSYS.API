@@ -1,9 +1,10 @@
+using System.Diagnostics;
 using AutoMapper;
 using SSYS.API.IAM.Authorization.Handlers.Interfaces;
 using SSYS.API.IAM.Domain.Models;
 using SSYS.API.IAM.Domain.Repositories;
 using SSYS.API.IAM.Domain.Services;
-using SSYS.API.IAM.Domain.Services.Comunication;
+using SSYS.API.IAM.Domain.Services.Communication;
 using SSYS.API.IAM.Exceptions;
 using SSYS.API.Shared.Domain.Repositories;
 using BCryptNet = BCrypt.Net.BCrypt;
@@ -27,8 +28,9 @@ public class UserService : IUserService
     
     public async Task<AuthenticateResponse> Authenticate(AuthenticateRequest request)
     {
-        var user = await _userRepository.FindByUserNameAsync(request.Username);
+        var user = await _userRepository.FindByUsernameAsync(request.Username);
         Console.WriteLine($"Request: {request.Username}, {request.Password}");
+        Debug.Assert(user != null, nameof(user) + " != null");
         Console.WriteLine($"User: {user.Id},{user?.Username}, {user?.Password}");
 
         if (user == null || !BCryptNet.Verify(request.Password,user.Password))
@@ -45,7 +47,7 @@ public class UserService : IUserService
         return response;
     }
 
-    public  async Task<IEnumerable<User>> ListAsync()
+    public  async Task<IEnumerable<User?>> ListAsync()
     {
         return await _userRepository.ListAsync();
     }
@@ -78,7 +80,7 @@ public class UserService : IUserService
     public async Task UpdateAsync(int id, UpdateRequest request)
     {
         var user = GetById(id);
-        var userWithUsername = await _userRepository.FindByUserNameAsync(request.Username);
+        var userWithUsername = await _userRepository.FindByUsernameAsync(request.Username);
         if (userWithUsername != null && userWithUsername.Id != id)
             throw new AppException($"Username {request.Username} is already taken");
         if (!string.IsNullOrEmpty(request.Password))
@@ -95,7 +97,7 @@ public class UserService : IUserService
         }
     }
 
-    private User GetById(int id)
+    private User? GetById(int id)
     {
         var user = _userRepository.FindById(id);
         if (user == null) throw new KeyNotFoundException("User not found");

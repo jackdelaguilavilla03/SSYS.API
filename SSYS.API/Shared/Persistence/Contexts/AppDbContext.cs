@@ -12,7 +12,7 @@ public class AppDbContext : DbContext
     {
     }
     public Microsoft.EntityFrameworkCore.DbSet<Account> MainUsers { get; set; }
-    public Microsoft.EntityFrameworkCore.DbSet<User> Users { get; set; }
+    public Microsoft.EntityFrameworkCore.DbSet<User?> Users { get; set; }
     
     public Microsoft.EntityFrameworkCore.DbSet<Product> Products { get; set; }//1
     public Microsoft.EntityFrameworkCore.DbSet<Category> Categories { get; set; }//2
