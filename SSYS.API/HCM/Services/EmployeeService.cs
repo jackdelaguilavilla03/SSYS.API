@@ -17,9 +17,9 @@ public class EmployeeService : IEmployeeService
         _unitOfWork = unitOfWork;
     }
 
-    public Task<IEnumerable<Employee>> ListAsync()
+    public async Task<IEnumerable<Employee>> ListAsync()
     {
-        throw new NotImplementedException();
+        return await _employeeRepository.ListAsync();
     }
 
     public async Task<EmployeeResponse> SaveAsync(Employee employee)

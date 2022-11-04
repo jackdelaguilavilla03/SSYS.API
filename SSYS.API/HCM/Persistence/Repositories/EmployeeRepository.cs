@@ -1,4 +1,5 @@
-﻿using SSYS.API.HCM.Domain.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using SSYS.API.HCM.Domain.Models;
 using SSYS.API.HCM.Domain.Repositories;
 using SSYS.API.Shared.Persistence.Contexts;
 using SSYS.API.Shared.Persistence.Repositories;
@@ -11,9 +12,9 @@ public class EmployeeRepository : BaseRepository, IEmployeeRepository
     {
     }
 
-    public Task<IEnumerable<Employee>> ListAsync()
+    public async Task<IEnumerable<Employee>> ListAsync()
     {
-        throw new NotImplementedException();
+        return await _context.Employees.ToListAsync();
     }
 
     public async Task AddAsync(Employee employee)
@@ -21,9 +22,9 @@ public class EmployeeRepository : BaseRepository, IEmployeeRepository
         await _context.Employees.AddAsync(employee);
     }
 
-    public Task<Employee> FindByIdAsync(int id)
+    public async Task<Employee> FindByIdAsync(int id)
     {
-        throw new NotImplementedException();
+        return await _context.Employees.FindAsync(id);
     }
 
     public void Update(Employee employee)
