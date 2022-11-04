@@ -37,9 +37,28 @@ public class EmployeeService : IEmployeeService
         }
     }
 
-    public Task<EmployeeResponse> UpdateAsync(int id, Employee employee)
+    public async Task<EmployeeResponse> UpdateAsync(int id, Employee employee)
     {
-        throw new NotImplementedException();
+        var existingEmployee = await _employeeRepository.FindByIdAsync(id);
+
+        if (existingEmployee == null)
+            return new EmployeeResponse("Employee not found.");
+
+        existingEmployee.Name = employee.Name;
+        existingEmployee.LastName = employee.LastName;
+        existingEmployee.Phone = employee.Phone;
+
+        try
+        {
+            _employeeRepository.Update(existingEmployee);
+            await _unitOfWork.CompleteAsync();
+
+            return new EmployeeResponse(existingEmployee);
+        }
+        catch (Exception e)
+        {
+            return new EmployeeResponse($"An error occurred while updating the employee: {e.Message}");
+        }
     }
 
     public async Task<EmployeeResponse> DeleteAsync(int id)
@@ -47,7 +66,7 @@ public class EmployeeService : IEmployeeService
         var existingCategory = await _employeeRepository.FindByIdAsync(id);
 
         if (existingCategory == null)
-            return new EmployeeResponse("Category not found.");
+            return new EmployeeResponse("Employee not found.");
 
         try
         {
@@ -58,7 +77,7 @@ public class EmployeeService : IEmployeeService
         }
         catch (Exception e)
         {
-            return new EmployeeResponse($"An error occurred while deleting the category: {e.Message}");
+            return new EmployeeResponse($"An error occurred while deleting the employee: {e.Message}");
         }
     }
 }

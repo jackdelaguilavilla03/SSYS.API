@@ -29,7 +29,7 @@ public class EmployeeRepository : BaseRepository, IEmployeeRepository
 
     public void Update(Employee employee)
     {
-        throw new NotImplementedException();
+        _context.Employees.Update(employee);
     }
 
     public void Remove(Employee employee)
