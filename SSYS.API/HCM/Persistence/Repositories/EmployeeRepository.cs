@@ -33,6 +33,6 @@ public class EmployeeRepository : BaseRepository, IEmployeeRepository
 
     public void Remove(Employee employee)
     {
-        throw new NotImplementedException();
+        _context.Employees.Remove(employee);
     }
 }

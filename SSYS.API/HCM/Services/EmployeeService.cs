@@ -42,8 +42,23 @@ public class EmployeeService : IEmployeeService
         throw new NotImplementedException();
     }
 
-    public Task<EmployeeResponse> DeleteAsync(int id)
+    public async Task<EmployeeResponse> DeleteAsync(int id)
     {
-        throw new NotImplementedException();
+        var existingCategory = await _employeeRepository.FindByIdAsync(id);
+
+        if (existingCategory == null)
+            return new EmployeeResponse("Category not found.");
+
+        try
+        {
+            _employeeRepository.Remove(existingCategory);
+            await _unitOfWork.CompleteAsync();
+
+            return new EmployeeResponse(existingCategory);
+        }
+        catch (Exception e)
+        {
+            return new EmployeeResponse($"An error occurred while deleting the category: {e.Message}");
+        }
     }
 }
