@@ -35,4 +35,32 @@ public class UserController : ControllerBase
         await _userService.RegisterAsync(request);
         return Ok(new { message = "Registration successful" });
     }
+    
+    [HttpGet]
+    public async Task<IActionResult> GetAll()
+    {
+        var users = await _userService.ListAsync();
+        return Ok(users);
+    }
+    
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetById(int id)
+    {
+        var user = await _userService.GetByIdAsync(id);
+        return Ok(user);
+    }
+    
+    [HttpPut("{id}")]
+    public async Task<IActionResult> Update(int id, UpdateRequest request)
+    {
+        await _userService.UpdateAsync(id, request);
+        return Ok(new { message = "Update successful" });
+    }
+    
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> Delete(int id)
+    {
+        await _userService.DeleteAsync(id);
+        return Ok(new { message = "Delete successful" });
+    }
 }
