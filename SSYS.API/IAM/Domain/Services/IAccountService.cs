@@ -1,9 +1,9 @@
 using SSYS.API.IAM.Domain.Models;
-using SSYS.API.IAM.Domain.Services.Comunication;
+using SSYS.API.IAM.Domain.Services.Communication;
 
 namespace SSYS.API.IAM.Domain.Services;
 
-public interface IMainUserService
+public interface IAccountService
 {
     Task<AuthenticateResponse> Authenticate(AuthenticateRequest request);
     Task<IEnumerable<Account>> ListAsync();

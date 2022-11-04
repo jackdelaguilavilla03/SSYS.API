@@ -2,7 +2,7 @@ using SSYS.API.IAM.Domain.Models;
 
 namespace SSYS.API.IAM.Domain.Repositories;
 
-public interface IMainUserRepository
+public interface IAccountRespository
 {
     Task<IEnumerable<Account>> ListAsync();
     Task AddAsync(Account account);
