@@ -1,5 +1,6 @@
 using System.Data.Entity;
 using Microsoft.EntityFrameworkCore;
+using SSYS.API.CRM.Domain.Models;
 using SSYS.API.HCM.Domain.Models;
 using SSYS.API.IAM.Domain.Models;
 using SSYS.API.SCM.Domain.Models;
@@ -19,6 +20,8 @@ public class AppDbContext : DbContext
     public Microsoft.EntityFrameworkCore.DbSet<Category> Categories { get; set; }//2
     
     public Microsoft.EntityFrameworkCore.DbSet<Employee> Employees { get; set; }//2
+    
+    public Microsoft.EntityFrameworkCore.DbSet<Customer> Customers { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -59,6 +62,15 @@ public class AppDbContext : DbContext
         builder.Entity<Employee>().Property(p => p.Name).IsRequired().HasMaxLength(30);
         builder.Entity<Employee>().Property(p => p.LastName).IsRequired().HasMaxLength(30);
         builder.Entity<Employee>().Property(p => p.Phone).IsRequired().HasMaxLength(9);
+        
+        //Customer
+        builder.Entity<Customer>().ToTable("Customers");
+        builder.Entity<Customer>().HasKey(p => p.Id);
+        builder.Entity<Customer>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
+        builder.Entity<Customer>().Property(p => p.Name).IsRequired().HasMaxLength(30);
+        builder.Entity<Customer>().Property(p => p.LastName).IsRequired().HasMaxLength(30);
+        builder.Entity<Customer>().Property(p => p.Email).IsRequired().HasMaxLength(40);
+        builder.Entity<Customer>().Property(p => p.Phone).IsRequired().HasMaxLength(9);
 
     }
 

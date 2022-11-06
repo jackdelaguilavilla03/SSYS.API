@@ -22,7 +22,11 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="CRM" />
+      <Folder Include="CRM\Domain\Services" />
+      <Folder Include="CRM\Interfaces\Rest\Controllers" />
+      <Folder Include="CRM\Mapping" />
+      <Folder Include="CRM\Resources" />
+      <Folder Include="CRM\Services" />
       <Folder Include="HCM\Interfaces\Internal" />
       <Folder Include="Profiles\Domain\Repositories" />
       <Folder Include="Profiles\Domain\Services" />
