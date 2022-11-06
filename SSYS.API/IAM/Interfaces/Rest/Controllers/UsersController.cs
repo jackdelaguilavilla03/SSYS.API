@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using SSYS.API.IAM.Domain.Services;
 using SSYS.API.IAM.Domain.Services.Communication;
 
-namespace SSYS.API.IAM.Controllers;
+namespace SSYS.API.IAM.Interfaces.Rest.Controllers;
 
 [Authorize]
 [ApiController]
