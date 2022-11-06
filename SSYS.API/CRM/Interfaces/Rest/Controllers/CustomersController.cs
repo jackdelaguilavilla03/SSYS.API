@@ -48,6 +48,24 @@ public class CustomersController : ControllerBase
         return Created(nameof(PostAsync), customerResource);
     }
 
+    [HttpPut("{id}")]
+    public async Task<IActionResult> PutAsync(int id, [FromBody] SaveCustomerResource resource)
+    {
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+
+        var customer = _mapper.Map<SaveCustomerResource, Customer>(resource);
+
+        var result = await _customerService.UpdateAsync(id, customer);
+
+        if (!result.Success)
+            return BadRequest(result.Message);
+
+        var customerResource = _mapper.Map<Customer, CustomerResource>(result.Resource);
+
+        return Ok(customerResource);
+    }
+
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteAsync(int id)
     {
