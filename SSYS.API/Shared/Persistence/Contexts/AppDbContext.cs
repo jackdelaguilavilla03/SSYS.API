@@ -29,12 +29,6 @@ public class AppDbContext : DbContext
             .HasForeignKey(u => u.AccountId)
             .OnDelete(DeleteBehavior.Cascade);
 
-        //Main User
-        builder.Entity<Account>().ToTable("MainUsers");
-        builder.Entity<Account>().HasKey(p => p.Id);
-        builder.Entity<Account>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
-        builder.Entity<Account>().Property(p => p.Users).IsRequired().HasMaxLength(100);
-
         //User
         builder.Entity<User>().ToTable("Users");
         builder.Entity<User>().HasKey(p => p.Id);
