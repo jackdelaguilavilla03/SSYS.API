@@ -9,19 +9,19 @@ namespace SSYS.API.IAM.Controllers;
 [Authorize]
 [ApiController]
 [Route("api/v1/[controller]")]
-public class UserController : ControllerBase
+public class UsersController : ControllerBase
 {
     private readonly IUserService _userService;
     private readonly IMapper _mapper;
     
-    public UserController(IUserService userService, IMapper mapper)
+    public UsersController(IUserService userService, IMapper mapper)
     {
         _userService = userService;
         _mapper = mapper;
     }
 
     [AllowAnonymous]
-    [HttpPost("sing-in")]
+    [HttpPost("/sign-in")]
     public async Task<IActionResult> Authenticate(AuthenticateRequest request)
     {
         var response = await _userService.Authenticate(request);
@@ -29,13 +29,14 @@ public class UserController : ControllerBase
     }
     
     [AllowAnonymous]
-    [HttpPost("sing-up")]
+    [HttpPost("/sign-up")]
     public async Task<IActionResult> Register(RegisterRequest request)
     {
         await _userService.RegisterAsync(request);
         return Ok(new { message = "Registration successful" });
     }
     
+    [AllowAnonymous]
     [HttpGet]
     public async Task<IActionResult> GetAll()
     {
@@ -63,4 +64,5 @@ public class UserController : ControllerBase
         await _userService.DeleteAsync(id);
         return Ok(new { message = "Delete successful" });
     }
+    
 }
