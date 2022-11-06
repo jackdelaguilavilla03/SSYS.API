@@ -22,11 +22,10 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="CRM\Interfaces\Rest\Controllers" />
       <Folder Include="HCM\Interfaces\Internal" />
       <Folder Include="Profiles\Domain\Repositories" />
       <Folder Include="Profiles\Domain\Services" />
-      <Folder Include="Shared\Services" />
+      <Folder Include="Shared\Services\Communication" />
       <Folder Include="Social" />
       <Folder Include="Subscriptions" />
     </ItemGroup>
