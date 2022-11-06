@@ -1,3 +1,4 @@
+using System.Data;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -19,7 +20,32 @@ public class JwtHandler : IJwtHandler
     }
     public string GenerateToken(User user)
     {
+        Console.WriteLine($"Secrete: {_appSettings.Secret}");
+        var secret = _appSettings.Secret;
+        var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
+        Console.WriteLine(($"Secret Key Length: {key.Length}"));
+        Console.WriteLine($"User Id: {user.Id.ToString()}");
+        var tokenDescriptor = new SecurityTokenDescriptor
+        {
+            Subject = new ClaimsIdentity(new[]
+            {
+                new Claim(ClaimTypes.Sid, user.Id.ToString()),
+                new Claim(ClaimTypes.Name, user.Username)
+            }),
+            Expires = DateTime.UtcNow.AddDays(7),
+            SigningCredentials = new SigningCredentials(
+                new SymmetricSecurityKey(key),
+                SecurityAlgorithms.HmacSha256Signature)
+        };
         var tokenHandler = new JwtSecurityTokenHandler();
+        Console.WriteLine($"Token: {tokenHandler.WriteToken(tokenHandler.CreateToken(tokenDescriptor))}");
+        var token = tokenHandler.CreateToken(tokenDescriptor);
+        return tokenHandler.WriteToken(token);
+
+
+
+        // Old code
+        /*var tokenHandler = new JwtSecurityTokenHandler();
         var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
         var tokenDescriptor = new SecurityTokenDescriptor
         {
@@ -36,7 +62,7 @@ public class JwtHandler : IJwtHandler
         tokenHandler = new JwtSecurityTokenHandler();
         Console.WriteLine($"Token Expiration: {tokenDescriptor.Expires.ToString()}");
         var token = tokenHandler.CreateToken(tokenDescriptor);
-        return tokenHandler.WriteToken(token);
+        return tokenHandler.WriteToken(token);*/
     }
 
     public int? ValidateToken(string token)
