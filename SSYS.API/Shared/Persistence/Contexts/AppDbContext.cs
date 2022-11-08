@@ -22,6 +22,7 @@ public class AppDbContext : DbContext
     public Microsoft.EntityFrameworkCore.DbSet<Employee> Employees { get; set; }//2
     
     public Microsoft.EntityFrameworkCore.DbSet<Customer> Customers { get; set; }
+    public Microsoft.EntityFrameworkCore.DbSet<SaleOrder> SaleOrders { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -71,7 +72,15 @@ public class AppDbContext : DbContext
         builder.Entity<Customer>().Property(p => p.LastName).IsRequired().HasMaxLength(30);
         builder.Entity<Customer>().Property(p => p.Email).IsRequired().HasMaxLength(40);
         builder.Entity<Customer>().Property(p => p.Phone).IsRequired().HasMaxLength(9);
-
+        
+        //SaleOrder
+        builder.Entity<SaleOrder>().ToTable("SalesOrder");
+        builder.Entity<SaleOrder>().HasKey(p => p.Id);
+        builder.Entity<SaleOrder>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
+        builder.Entity<SaleOrder>().Property(p => p.MethodOfPayment).IsRequired();
+        builder.Entity<SaleOrder>().Property(p => p.Category).IsRequired();
+        builder.Entity<SaleOrder>().Property(p => p.Product).IsRequired();
+        builder.Entity<SaleOrder>().Property(p => p.Amount).IsRequired().HasMaxLength(4);
     }
 
 }
