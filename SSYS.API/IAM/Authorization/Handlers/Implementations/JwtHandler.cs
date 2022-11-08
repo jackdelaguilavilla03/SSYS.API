@@ -7,6 +7,7 @@ using Microsoft.IdentityModel.Tokens;
 using SSYS.API.IAM.Authorization.Handlers.Interfaces;
 using SSYS.API.IAM.Authorization.Settings;
 using SSYS.API.IAM.Domain.Models;
+using SSYS.API.IAM.Domain.Models.Entities;
 
 namespace SSYS.API.IAM.Authorization.Handlers.Implementations;
 

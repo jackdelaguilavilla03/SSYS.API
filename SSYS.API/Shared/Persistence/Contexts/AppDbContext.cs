@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using SSYS.API.CRM.Domain.Models;
 using SSYS.API.HCM.Domain.Models;
 using SSYS.API.IAM.Domain.Models;
+using SSYS.API.IAM.Domain.Models.Entities;
 using SSYS.API.SCM.Domain.Models;
 using DbContext = Microsoft.EntityFrameworkCore.DbContext;
 
@@ -28,9 +29,9 @@ public class AppDbContext : DbContext
         // Relationships
         builder.Entity<Account>()
             .HasMany(u => u.Users)
-            .WithOne(u => u.Account)
+            .WithOne(a => a.Account)
             .HasForeignKey(u => u.AccountId)
-            .OnDelete(DeleteBehavior.Cascade);
+            .IsRequired();
 
         //User
         builder.Entity<User>().ToTable("Users");

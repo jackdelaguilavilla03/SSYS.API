@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using SSYS.API.IAM.Domain.Models;
+using SSYS.API.IAM.Domain.Models.Entities;
 using SSYS.API.IAM.Domain.Repositories;
 using SSYS.API.Shared.Persistence.Contexts;
 using SSYS.API.Shared.Persistence.Repositories;

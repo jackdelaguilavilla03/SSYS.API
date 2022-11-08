@@ -2,6 +2,7 @@ using System.Diagnostics;
 using AutoMapper;
 using SSYS.API.IAM.Authorization.Handlers.Interfaces;
 using SSYS.API.IAM.Domain.Models;
+using SSYS.API.IAM.Domain.Models.Entities;
 using SSYS.API.IAM.Domain.Repositories;
 using SSYS.API.IAM.Domain.Services;
 using SSYS.API.IAM.Domain.Services.Communication;
