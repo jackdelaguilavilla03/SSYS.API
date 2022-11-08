@@ -6,10 +6,5 @@ namespace SSYS.API.IAM.Domain.Services;
 
 public interface IAccountService
 {
-    Task<AuthenticateResponse> Authenticate(AuthenticateRequest request);
-    Task<IEnumerable<Account>> ListAsync();
-    Task<Account> GetByIdAsync(int id);
-    Task RegisterAsync(RegisterRequest request);
-    Task UpdateAsync(int id, UpdateRequest request);
-    Task DeleteAsync(int id);
+    
 }

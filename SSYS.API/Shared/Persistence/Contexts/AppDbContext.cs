@@ -26,12 +26,7 @@ public class AppDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
-        // Relationships
-        builder.Entity<Account>()
-            .HasMany(u => u.Users)
-            .WithOne(a => a.Account)
-            .HasForeignKey(u => u.AccountId)
-            .IsRequired();
+        
 
         //User
         builder.Entity<User>().ToTable("Users");

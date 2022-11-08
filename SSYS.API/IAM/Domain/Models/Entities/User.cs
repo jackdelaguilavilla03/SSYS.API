@@ -12,6 +12,5 @@ public class User : BaseModel
 
     // Relationship
     public int AccountId { get; set; }
-    public Account Account { get; set; }
     public Role UserRoles { get; set; }
 }
