@@ -1,10 +1,9 @@
+using SSYS.API.IAM.Domain.Models.Entities;
 using Swashbuckle.AspNetCore.Annotations;
 
 namespace SSYS.API.IAM.Resources;
-[SwaggerSchema(Required = new []{"Id","Username","Password"})]
-public abstract class AccountResource
+public class AccountResource
 {
-    [SwaggerSchema("Main User Identifier")]
     public int Id { get; set; }
-    
+    public ICollection<User> Users { get; set; }
 }

@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 using SSYS.API.IAM.Domain.Models.Enumeration;
 using SSYS.API.Shared.Domain.Model;
@@ -12,5 +13,7 @@ public class User : BaseModel
 
     // Relationship
     public int AccountId { get; set; }
+    [ForeignKey("AccountId")]
+    public Account Account { get; set; }
     public Role UserRoles { get; set; }
 }
