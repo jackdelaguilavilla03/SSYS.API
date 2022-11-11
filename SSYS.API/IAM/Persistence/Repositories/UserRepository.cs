@@ -33,10 +33,6 @@ public class UserRepository : BaseRepository, IUserRepository
         return await _context.Users.FirstOrDefaultAsync(u => u.Username == username);
     }
 
-    public async Task<IEnumerable<User?>> FindByAccountIdAsync(int accountId)
-    {
-        return await _context.Users.Where(u => u.AccountId == accountId).ToListAsync();
-    }
 
     public void Update(User? user)
     {

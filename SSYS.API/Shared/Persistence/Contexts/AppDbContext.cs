@@ -14,7 +14,6 @@ public class AppDbContext : DbContext
     public AppDbContext(DbContextOptions options) : base(options)
     {
     }
-    public Microsoft.EntityFrameworkCore.DbSet<Account?> Accounts { get; set; }
     public Microsoft.EntityFrameworkCore.DbSet<User> Users { get; set; }
     
     public Microsoft.EntityFrameworkCore.DbSet<Product> Products { get; set; }//1
