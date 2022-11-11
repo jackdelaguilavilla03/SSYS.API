@@ -27,24 +27,19 @@ public class UserService : IUserService
         _mapper = mapper;
     }
     
-    public async Task<AuthenticateResponse> Authenticate(AuthenticateRequest request)
+    public async Task<AuthenticateResponse> Authenticate(AuthenticateRequest model)
     {
-        var user = await _userRepository.FindByUsernameAsync(request.Username);
-        Console.WriteLine($"Request: {request.Username}, {request.Password}");
-        Debug.Assert(user != null, nameof(user) + " != null");
-        Console.WriteLine($"User: {user.Id},{user?.Username}, {user?.Password}");
-
-        if (user == null || !BCryptNet.Verify(request.Password,user.Password))
-        {
-            Console.WriteLine("Authentication failed");
+        // Find Username
+        var user = await _userRepository.FindByUsernameAsync(model.Username);
+        
+        // Validate Password
+        if (user == null || !BCryptNet.Verify(model.Password, user.Password))
+            // On Error throw Exception
             throw new AppException("Username or password is incorrect");
-        }
-        Console.WriteLine("Authentication success. About to generate token");
-        // Authentication successful so generate jwt token
+
+        // On Authentication successful 
         var response = _mapper.Map<AuthenticateResponse>(user);
-        Console.WriteLine($"Response: {response.Id}, {response.Username}");
         response.Token = _jwtHandler.GenerateToken(user);
-        Console.WriteLine($"Token: {response.Token}");
         return response;
     }
 
@@ -62,7 +57,7 @@ public class UserService : IUserService
 
     public async Task RegisterAsync(RegisterRequest request)
     {
-        if (_userRepository.ExistsByUser(request.Username))
+        if (_userRepository.ExistsByUsername(request.Username))
             throw new AppException($"Username {request.Username} is already taken");
         var user = _mapper.Map<User>(request);
         user.Password = BCryptNet.HashPassword(request.Password);
@@ -118,4 +113,5 @@ public class UserService : IUserService
             throw new AppException($"An error occurred when deleting the user: {ex.Message}");
         }
     }
+    
 }

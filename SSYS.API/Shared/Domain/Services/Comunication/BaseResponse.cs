@@ -1,4 +1,4 @@
-namespace SSYS.API.Shared.Domain.Services.Comunication;
+﻿namespace SSYS.API.Shared.Domain.Services.Comunication;
 
 public abstract class BaseResponse<T>
 {

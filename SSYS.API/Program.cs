@@ -1,5 +1,7 @@
+using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using SSYS.API.IAM.Authorization.Settings;
+using SSYS.API.Shared.Persistence.Contexts;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,8 +10,26 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+
+// Add Database Connection
+
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
 // AppSetting Configuration
 builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
+
+builder.Services.AddDbContext<AppDbContext>(
+    option => option.UseMySQL(connectionString)
+        .LogTo(Console.WriteLine, LogLevel.Information)
+        .EnableSensitiveDataLogging()
+        .EnableDetailedErrors());
+
+// Add lowercase routes
+builder.Services.AddRouting(options => options.LowercaseUrls = true);
+
+
+
+
 // Swagger Configuration
 builder.Services.AddSwaggerGen(options =>
 {

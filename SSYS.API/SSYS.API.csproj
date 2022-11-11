@@ -23,7 +23,6 @@
 
     <ItemGroup>
       <Folder Include="HCM\Interfaces\Internal" />
-      <Folder Include="Shared\Services\Communication" />
     </ItemGroup>
 
 </Project>
