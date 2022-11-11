@@ -8,12 +8,12 @@ namespace SSYS.API.IAM.Authorization.Middleware;
 public class ErrorHandlerMiddleware
 {
     private readonly RequestDelegate _next;
-    
+
     public ErrorHandlerMiddleware(RequestDelegate next)
     {
         _next = next;
     }
-    
+
     public async Task Invoke(HttpContext context)
     {
         try
@@ -23,21 +23,25 @@ public class ErrorHandlerMiddleware
         catch (Exception error)
         {
             var response = context.Response;
-            response.ContentType = MediaTypeNames.Application.Json;
+            response.ContentType = "application/json";
             switch (error)
             {
-                case AppException:
+                case AppException e:
+                    // Custom application error
                     response.StatusCode = (int)HttpStatusCode.BadRequest;
                     break;
-                case KeyNotFoundException:
+                case KeyNotFoundException e:
+                    // Not found error
                     response.StatusCode = (int)HttpStatusCode.NotFound;
                     break;
                 default:
+                    // Unhandled error
                     response.StatusCode = (int)HttpStatusCode.InternalServerError;
                     break;
+    
             }
-            
-            var result = JsonSerializer.Serialize(new { error = error.Message });
+
+            var result = JsonSerializer.Serialize(new { message = error?.Message });
             await response.WriteAsync(result);
         }
     }

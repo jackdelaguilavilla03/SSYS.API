@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using SSYS.API.CRM.Domain.Models;
 using SSYS.API.HCM.Domain.Models;
 using SSYS.API.IAM.Domain.Models;
+using SSYS.API.IAM.Domain.Models.Entities;
 using SSYS.API.SCM.Domain.Models;
 using DbContext = Microsoft.EntityFrameworkCore.DbContext;
 
@@ -13,8 +14,7 @@ public class AppDbContext : DbContext
     public AppDbContext(DbContextOptions options) : base(options)
     {
     }
-    public Microsoft.EntityFrameworkCore.DbSet<Account> MainUsers { get; set; }
-    public Microsoft.EntityFrameworkCore.DbSet<User?> Users { get; set; }
+    public Microsoft.EntityFrameworkCore.DbSet<User> Users { get; set; }
     
     public Microsoft.EntityFrameworkCore.DbSet<Product> Products { get; set; }//1
     public Microsoft.EntityFrameworkCore.DbSet<Category> Categories { get; set; }//2
@@ -25,12 +25,7 @@ public class AppDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
-        // Relationships
-        builder.Entity<Account>()
-            .HasMany(u => u.Users)
-            .WithOne(u => u.Account)
-            .HasForeignKey(u => u.AccountId)
-            .OnDelete(DeleteBehavior.Cascade);
+        
 
         //User
         builder.Entity<User>().ToTable("Users");

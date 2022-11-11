@@ -23,11 +23,6 @@
 
     <ItemGroup>
       <Folder Include="HCM\Interfaces\Internal" />
-      <Folder Include="Profiles\Domain\Repositories" />
-      <Folder Include="Profiles\Domain\Services" />
-      <Folder Include="Shared\Services\Communication" />
-      <Folder Include="Social" />
-      <Folder Include="Subscriptions" />
     </ItemGroup>
 
 </Project>

@@ -7,6 +7,7 @@ using Microsoft.IdentityModel.Tokens;
 using SSYS.API.IAM.Authorization.Handlers.Interfaces;
 using SSYS.API.IAM.Authorization.Settings;
 using SSYS.API.IAM.Domain.Models;
+using SSYS.API.IAM.Domain.Models.Entities;
 
 namespace SSYS.API.IAM.Authorization.Handlers.Implementations;
 
@@ -38,31 +39,13 @@ public class JwtHandler : IJwtHandler
                 SecurityAlgorithms.HmacSha256Signature)
         };
         var tokenHandler = new JwtSecurityTokenHandler();
-        Console.WriteLine($"Token: {tokenHandler.WriteToken(tokenHandler.CreateToken(tokenDescriptor))}");
+        
+        Console.WriteLine($"Token Expiration: {tokenDescriptor.Expires.ToString()}");
+
         var token = tokenHandler.CreateToken(tokenDescriptor);
+
         return tokenHandler.WriteToken(token);
 
-
-
-        // Old code
-        /*var tokenHandler = new JwtSecurityTokenHandler();
-        var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
-        var tokenDescriptor = new SecurityTokenDescriptor
-        {
-            Subject = new ClaimsIdentity(new Claim[]
-            {
-                new Claim(ClaimTypes.Sid, user.Id.ToString()),
-                new Claim(ClaimTypes.Name, user.Username)
-            }),
-            Expires = DateTime.UtcNow.AddHours(1),
-            SigningCredentials = new SigningCredentials(
-                new SymmetricSecurityKey(key), 
-                SecurityAlgorithms.HmacSha256Signature)
-        };
-        tokenHandler = new JwtSecurityTokenHandler();
-        Console.WriteLine($"Token Expiration: {tokenDescriptor.Expires.ToString()}");
-        var token = tokenHandler.CreateToken(tokenDescriptor);
-        return tokenHandler.WriteToken(token);*/
     }
 
     public int? ValidateToken(string token)
@@ -90,7 +73,7 @@ public class JwtHandler : IJwtHandler
         catch (Exception e)
         {
             Console.WriteLine(e);
-            throw;
+            return null;
         }
     }
 }
