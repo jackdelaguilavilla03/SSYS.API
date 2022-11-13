@@ -4,7 +4,7 @@ namespace SSYS.API.IAM.Exceptions;
 
 public class AppException : Exception
 {
-    public AppException()
+    public AppException() : base()
     {
     }
 
@@ -12,8 +12,9 @@ public class AppException : Exception
     {
     }
 
-    public AppException(string message, params object[] args) : 
-        base(String.Format(CultureInfo.CurrentCulture, message, args))
+    public AppException(string message, params object[] args)
+        : base(string.Format(CultureInfo.CurrentCulture, message, args))
     {
+        
     }
 }
