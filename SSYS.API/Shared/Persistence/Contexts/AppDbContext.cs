@@ -5,6 +5,7 @@ using SSYS.API.HCM.Domain.Models;
 using SSYS.API.IAM.Domain.Models;
 using SSYS.API.IAM.Domain.Models.Entities;
 using SSYS.API.SCM.Domain.Models;
+using SSYS.API.Shared.Extensions;
 using DbContext = Microsoft.EntityFrameworkCore.DbContext;
 
 namespace SSYS.API.Shared.Persistence.Contexts;
@@ -27,7 +28,7 @@ public class AppDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
-        
+        base.OnModelCreating(builder);
 
         //User
         builder.Entity<User>().ToTable("Users");
@@ -76,7 +77,10 @@ public class AppDbContext : DbContext
         builder.Entity<Customer>().Property(p => p.LastName).IsRequired().HasMaxLength(30);
         builder.Entity<Customer>().Property(p => p.Email).IsRequired().HasMaxLength(40);
         builder.Entity<Customer>().Property(p => p.Phone).IsRequired().HasMaxLength(9);
-
+        
+        // Apply Snake Case Naming Convention
+        
+        builder.UseSnakeCaseNamingConvention();
     }
 
 }
