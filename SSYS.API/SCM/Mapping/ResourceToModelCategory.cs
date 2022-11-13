@@ -6,7 +6,7 @@ namespace SSYS.API.SCM.Mapping;
 
 public class ResourceToModelCategory: AutoMapper.Profile
 {
-    protected ResourceToModelCategory()
+    public ResourceToModelCategory()
     {
         CreateMap<SaveCategoryResource, Category>();
     }
