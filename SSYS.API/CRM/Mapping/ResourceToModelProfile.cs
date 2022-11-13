@@ -4,7 +4,7 @@ using SSYS.API.CRM.Resources;
 
 namespace SSYS.API.CRM.Mapping;
 
-public class ResourceToModelProfile : Profile
+public class ResourceToModelProfile : AutoMapper.Profile
 {
     protected ResourceToModelProfile()
     {

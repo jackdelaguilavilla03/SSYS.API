@@ -8,7 +8,7 @@ using SSYS.API.SCM.Resources;
 
 namespace SSYS.API.IAM.Mapping;
 
-public class ResourceToModelProfile : Profile
+public class ResourceToModelProfile : AutoMapper.Profile
 {
     public ResourceToModelProfile()
     {

@@ -4,7 +4,7 @@ using SSYS.API.SCM.Resources;
 
 namespace SSYS.API.SCM.Mapping;
 
-public class ModelToResourceCategory: Profile
+public class ModelToResourceCategory: AutoMapper.Profile
 {
     protected ModelToResourceCategory()
     {

@@ -21,7 +21,7 @@ public class AppDbContext : DbContext
     
     public Microsoft.EntityFrameworkCore.DbSet<Employee> Employees { get; set; }//2
     
-    public System.Data.Entity.DbSet<Profile.Domain.Model.Entities.Profile> Profiles { get; set; }
+    public Microsoft.EntityFrameworkCore.DbSet<Profile.Domain.Model.Entities.Profile> Profiles { get; set; }
 
     public Microsoft.EntityFrameworkCore.DbSet<Customer> Customers { get; set; }
 
@@ -36,7 +36,7 @@ public class AppDbContext : DbContext
         builder.Entity<User>().Property(p => p.Username).IsRequired().HasMaxLength(100);
         
         // Profiles
-        builder.Entity<Profile.Domain.Model.Entities.Profile>().ToTable("Profile");
+        builder.Entity<Profile.Domain.Model.Entities.Profile>().ToTable("Profiles");
         builder.Entity<Profile.Domain.Model.Entities.Profile>().HasKey(p => p.Id);
         builder.Entity<Profile.Domain.Model.Entities.Profile>().Property(p => p.FirstName).IsRequired();
         builder.Entity<Profile.Domain.Model.Entities.Profile>().Property(p => p.LastName).IsRequired();

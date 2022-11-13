@@ -1,4 +1,5 @@
-﻿using SSYS.API.Profile.Domain.Repositories;
+﻿using Microsoft.EntityFrameworkCore;
+using SSYS.API.Profile.Domain.Repositories;
 using SSYS.API.Shared.Persistence.Contexts;
 using SSYS.API.Shared.Persistence.Repositories;
 
@@ -12,26 +13,26 @@ public class ProfileRespository : BaseRepository, IProfileRepository
 
     public async Task<IEnumerable<Domain.Model.Entities.Profile>> ListAsync()
     {
-        throw new NotImplementedException();
+        return await _context.Profiles.ToListAsync();
     }
 
     public async Task AddAsync(Domain.Model.Entities.Profile profile)
     {
-        throw new NotImplementedException();
+        await _context.Profiles.AddAsync(profile);
     }
 
-    public Task<Domain.Model.Entities.Profile> FindByIdAsync(int id)
+    public async Task<Domain.Model.Entities.Profile> FindByIdAsync(int id)
     {
-        throw new NotImplementedException();
+        return await _context.Profiles.FindAsync(id);
     }
 
     public void Update(Domain.Model.Entities.Profile profile)
     {
-        throw new NotImplementedException();
+        _context.Profiles.Update(profile);
     }
 
     public void Remove(Domain.Model.Entities.Profile profile)
     {
-        throw new NotImplementedException();
+        _context.Profiles.Remove(profile);
     }
 }

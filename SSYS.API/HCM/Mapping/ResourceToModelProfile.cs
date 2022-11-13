@@ -4,7 +4,7 @@ using SSYS.API.HCM.Resources;
 
 namespace SSYS.API.HCM.Mapping;
 
-public class ResourceToModelProfile : Profile
+public class ResourceToModelProfile : AutoMapper.Profile
 {
     public ResourceToModelProfile()
     {
