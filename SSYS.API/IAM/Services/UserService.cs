@@ -61,6 +61,7 @@ public class UserService : IUserService
             throw new AppException($"Username {request.Username} is already taken");
         var user = _mapper.Map<User>(request);
         user.PasswordHash = BCryptNet.HashPassword(request.Password);
+        user.Email = request.Email;
 
         try
         {
