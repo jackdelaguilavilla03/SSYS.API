@@ -24,7 +24,6 @@
     <ItemGroup>
       <Folder Include="HCM\Interfaces\Internal" />
       <Folder Include="Profile\Mapping" />
-      <Folder Include="Profile\Persistence" />
       <Folder Include="Profile\Resources" />
       <Folder Include="Profile\Services" />
     </ItemGroup>
