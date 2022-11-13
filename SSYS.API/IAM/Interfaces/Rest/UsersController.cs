@@ -1,7 +1,10 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using SSYS.API.IAM.Authorization.Attributes;
+using SSYS.API.IAM.Domain.Models.Entities;
 using SSYS.API.IAM.Domain.Services;
+using SSYS.API.IAM.Domain.Services.Communication;
+using SSYS.API.IAM.Resources;
 
 namespace SSYS.API.IAM.Interfaces.Rest;
 
@@ -21,7 +24,7 @@ public class UsersController : ControllerBase
 
     [AllowAnonymous]
     [HttpPost("sign-in")]
-    public async Task<ActionResult> Authenticate(AuthenticationR request)
+    public async Task<ActionResult> Authenticate(AuthenticateRequest request)
     {
         var response = await _userService.Authenticate(request);
         return Ok(response);
