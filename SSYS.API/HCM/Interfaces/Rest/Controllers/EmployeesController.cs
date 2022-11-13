@@ -22,8 +22,8 @@ public class EmployeesController : ControllerBase
     [HttpGet]
     public async Task<IEnumerable<EmployeeResource>> GetAllAsync()
     {
-        var categories = await _employeeService.ListAsync();
-        var resources = _mapper.Map<IEnumerable<Employee>, IEnumerable<EmployeeResource>>(categories);
+        var employees = await _employeeService.ListAsync();
+        var resources = _mapper.Map<IEnumerable<Employee>, IEnumerable<EmployeeResource>>(employees);
         return resources;
     }
 
@@ -33,17 +33,16 @@ public class EmployeesController : ControllerBase
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
 
-        var category = _mapper.Map<SaveEmployeeResource, Employee>(resource);
+        var employee = _mapper.Map<SaveEmployeeResource, Employee>(resource);
 
-        var result = await _employeeService.SaveAsync(category);
+        var result = await _employeeService.SaveAsync(employee);
 
         if (!result.Success)
             return BadRequest(result.Message);
 
-        var categoryResource = _mapper.Map<Employee, EmployeeResource>(result.Resource);
+        var employeeResource = _mapper.Map<Employee, EmployeeResource>(result.Resource);
 
-        return Created(nameof(PostAsync), categoryResource);
-
+        return Created(nameof(PostAsync), employeeResource);
     }
 
     [HttpPut("{id}")]
@@ -52,16 +51,16 @@ public class EmployeesController : ControllerBase
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
 
-        var category = _mapper.Map<SaveEmployeeResource, Employee>(resource);
+        var employee = _mapper.Map<SaveEmployeeResource, Employee>(resource);
 
-        var result = await _employeeService.UpdateAsync(id, category);
+        var result = await _employeeService.UpdateAsync(id, employee);
 
         if (!result.Success)
             return BadRequest(result.Message);
 
-        var categoryResource = _mapper.Map<Employee, EmployeeResource>(result.Resource);
+        var employeeResource = _mapper.Map<Employee, EmployeeResource>(result.Resource);
 
-        return Ok(categoryResource);
+        return Ok(employeeResource);
     }
 
     [HttpDelete("{id}")]

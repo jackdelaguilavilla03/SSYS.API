@@ -23,6 +23,7 @@
 
     <ItemGroup>
       <Folder Include="HCM\Interfaces\Internal" />
+      <Folder Include="Profile\Interfaces\Internal" />
     </ItemGroup>
 
 </Project>
