@@ -6,7 +6,7 @@ namespace SSYS.API.SCM.Mapping;
 
 public class ModelToResourceProduct: AutoMapper.Profile
 {
-    protected ModelToResourceProduct()
+    public ModelToResourceProduct()
     {
         CreateMap<Product, ProductResource>();
         

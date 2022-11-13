@@ -6,7 +6,7 @@ namespace SSYS.API.CRM.Mapping;
 
 public class ModelToResourceProfile : AutoMapper.Profile
 {
-    protected ModelToResourceProfile()
+    public ModelToResourceProfile()
     {
         CreateMap<Customer, CustomerResource>();
     }

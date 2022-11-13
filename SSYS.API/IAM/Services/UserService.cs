@@ -33,7 +33,7 @@ public class UserService : IUserService
         var user = await _userRepository.FindByUsernameAsync(model.Username);
         
         // Validate Password
-        if (user == null || !BCryptNet.Verify(model.Password, user.Password))
+        if (user == null || !BCryptNet.Verify(model.Password, user.PasswordHash))
             // On Error throw Exception
             throw new AppException("Username or password is incorrect");
 
@@ -60,7 +60,7 @@ public class UserService : IUserService
         if (_userRepository.ExistsByUsername(request.Username))
             throw new AppException($"Username {request.Username} is already taken");
         var user = _mapper.Map<User>(request);
-        user.Password = BCryptNet.HashPassword(request.Password);
+        user.PasswordHash = BCryptNet.HashPassword(request.Password);
 
         try
         {
@@ -80,7 +80,7 @@ public class UserService : IUserService
         if (userWithUsername != null && userWithUsername.Id != id)
             throw new AppException($"Username {request.Username} is already taken");
         if (!string.IsNullOrEmpty(request.Password))
-            user.Password = BCryptNet.HashPassword(request.Password);
+            user.PasswordHash = BCryptNet.HashPassword(request.Password);
         _mapper.Map(request, user);
         try
         {
