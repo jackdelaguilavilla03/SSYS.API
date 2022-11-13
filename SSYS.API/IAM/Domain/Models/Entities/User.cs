@@ -4,9 +4,10 @@ using SSYS.API.Shared.Domain.Model;
 
 namespace SSYS.API.IAM.Domain.Models.Entities;
 
-public class User : BaseModel
+public class User
 {
+    public int Id { get; set; }
     public string Username { get; set; }
-    [JsonIgnore] public string Password { get; set; }
-    public string Email { get; set; }
+    [JsonIgnore]
+    public string PasswordHash { get; set; }
 }

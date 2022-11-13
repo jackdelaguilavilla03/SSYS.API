@@ -14,17 +14,20 @@ namespace SSYS.API.IAM.Authorization.Handlers.Implementations;
 public class JwtHandler : IJwtHandler
 {
     private readonly AppSettings _appSettings;
-    
+
     public JwtHandler(IOptions<AppSettings> appSettings)
     {
         _appSettings = appSettings.Value;
     }
+
     public string GenerateToken(User user)
     {
-        Console.WriteLine($"Secrete: {_appSettings.Secret}");
+        // Generate Token for a valid period of 7 days
+        
+        Console.WriteLine($"Secret: {_appSettings.Secret}");
         var secret = _appSettings.Secret;
-        var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
-        Console.WriteLine(($"Secret Key Length: {key.Length}"));
+        var key = Encoding.ASCII.GetBytes(secret);
+        Console.WriteLine($"Secret Key Length: {key.Length}");
         Console.WriteLine($"User Id: {user.Id.ToString()}");
         var tokenDescriptor = new SecurityTokenDescriptor
         {
@@ -36,7 +39,7 @@ public class JwtHandler : IJwtHandler
             Expires = DateTime.UtcNow.AddDays(7),
             SigningCredentials = new SigningCredentials(
                 new SymmetricSecurityKey(key),
-                SecurityAlgorithms.HmacSha256Signature)
+                SecurityAlgorithms.HmacSha512Signature)
         };
         var tokenHandler = new JwtSecurityTokenHandler();
         
@@ -45,15 +48,17 @@ public class JwtHandler : IJwtHandler
         var token = tokenHandler.CreateToken(tokenDescriptor);
 
         return tokenHandler.WriteToken(token);
-
     }
 
     public int? ValidateToken(string token)
     {
         if (string.IsNullOrEmpty(token))
             return null;
+
         var tokenHandler = new JwtSecurityTokenHandler();
         var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
+        
+        // Execute Token validation
 
         try
         {
@@ -63,11 +68,14 @@ public class JwtHandler : IJwtHandler
                 IssuerSigningKey = new SymmetricSecurityKey(key),
                 ValidateIssuer = false,
                 ValidateAudience = false,
-                ClockSkew = TimeSpan.Zero
-            }, out SecurityToken validatedToken);
+                // Expiration with no delay
+                ClockSkew = + TimeSpan.Zero
+            }, out var validatedToken);
+
             var jwtToken = (JwtSecurityToken)validatedToken;
             var userId = int.Parse(jwtToken.Claims.First(
                 claim => claim.Type == ClaimTypes.Sid).Value);
+
             return userId;
         }
         catch (Exception e)
@@ -75,5 +83,7 @@ public class JwtHandler : IJwtHandler
             Console.WriteLine(e);
             return null;
         }
+        
     }
+    
 }
