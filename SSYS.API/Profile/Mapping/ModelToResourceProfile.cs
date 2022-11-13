@@ -1,6 +1,11 @@
-﻿namespace SSYS.API.Profile.Mapping;
+﻿using SSYS.API.Profile.Resources;
 
-public class ModelToResourceProfile
+namespace SSYS.API.Profile.Mapping;
+
+public class ModelToResourceProfile : AutoMapper.Profile
 {
-    
+    public ModelToResourceProfile()
+    {
+        CreateMap<Domain.Model.Entities.Profile, ProfileResource>();
+    }
 }

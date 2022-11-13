@@ -63,17 +63,17 @@ public class EmployeeService : IEmployeeService
 
     public async Task<EmployeeResponse> DeleteAsync(int id)
     {
-        var existingCategory = await _employeeRepository.FindByIdAsync(id);
+        var existingEmployee = await _employeeRepository.FindByIdAsync(id);
 
-        if (existingCategory == null)
+        if (existingEmployee == null)
             return new EmployeeResponse("Employee not found.");
 
         try
         {
-            _employeeRepository.Remove(existingCategory);
+            _employeeRepository.Remove(existingEmployee);
             await _unitOfWork.CompleteAsync();
 
-            return new EmployeeResponse(existingCategory);
+            return new EmployeeResponse(existingEmployee);
         }
         catch (Exception e)
         {
