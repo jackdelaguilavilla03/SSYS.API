@@ -86,8 +86,8 @@ public class ProductService: IProductService
         }
     }
 
-    public Task<IEnumerable<Product>> FindByProductPriceAsync(int price)
+    public async Task<IEnumerable<Product>> FindByProductPriceAsync(int price)
     {
-        throw new NotImplementedException();
+        return await _productRepository.FindByProductPriceAsync(price);
     }
 }
