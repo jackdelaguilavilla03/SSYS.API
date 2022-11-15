@@ -4,7 +4,7 @@ using SSYS.API.SCM.Domain.Models;
 
 namespace SSYS.API.CRM.Resources;
 
-public class SaveSaveOrderResource
+public class SaveSaleOrderResource
 {
     [Required]
     public MethodOfPayment MethodOfPayment { get; set; }
