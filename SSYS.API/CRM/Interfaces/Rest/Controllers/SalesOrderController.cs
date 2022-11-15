@@ -67,5 +67,18 @@ public class SalesOrderController : ControllerBase
 
         return Ok(saleOrderResource);
     }
+    
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteAsync(int id)
+    {
+        var result = await _saleOrderService.DeleteAsync(id);
+
+        if (!result.Success)
+            return BadRequest(result.Message);
+
+        var saleOrderResource = _mapper.Map<SaleOrder, SaleOrderResource>(result.Resource);
+
+        return Ok(saleOrderResource);
+    }
 
 }
