@@ -49,5 +49,23 @@ public class SalesOrderController : ControllerBase
 
         return Created(nameof(PostAsync), saleOrderResource);
     }
+    
+    [HttpPut("{id}")]
+    public async Task<IActionResult> PutAsync(int id, [FromBody] SaveSaleOrderResource resource)
+    {
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+
+        var saleOrder = _mapper.Map<SaveSaleOrderResource, SaleOrder>(resource);
+
+        var result = await _saleOrderService.UpdateAsync(id, saleOrder);
+
+        if (!result.Success)
+            return BadRequest(result.Message);
+
+        var saleOrderResource = _mapper.Map<SaleOrder, SaleOrderResource>(result.Resource);
+
+        return Ok(saleOrderResource);
+    }
 
 }
