@@ -1,4 +1,5 @@
 ﻿using SSYS.API.SCM.Domain.Models;
+using SSYS.API.SCM.Domain.Services.Comunication;
 
 public interface IInventoryRepository
 {
@@ -11,4 +12,5 @@ public interface IInventoryRepository
     Task<IEnumerable<Inventory>> FindByProductTitleAsync(string title);
     void Update(Inventory inventory);
     void Remove(Inventory inventory);
+    Task<Inventory> FindByInventoryIdAsync(int idInventory);
 }
