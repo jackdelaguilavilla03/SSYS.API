@@ -26,38 +26,71 @@ public class InventoryService: IInventoryService
         return await _inventoryRepository.FindByIdAsync(IdInventory);
     }
 
-    public Task<IEnumerable<Inventory>> ListByCategoryIdAsync(int IdCategory)
+    public async Task<IEnumerable<Inventory>> ListByCategoryIdAsync(int IdCategory)
     {
-        throw new NotImplementedException();
+        return await _inventoryRepository.FindByCategoryIdAsync(IdCategory);
     }
 
-    public Task<IEnumerable<Inventory>> ListByProductIdAsync(int IdProduct)
+    public async Task<IEnumerable<Inventory>> ListByProductIdAsync(int IdProduct)
     {
-        throw new NotImplementedException();
+        return await _inventoryRepository.FindByProductIdAsync(IdProduct);
     }
 
-    public Task<IEnumerable<Inventory>> ListByCategoryTitleAsync(string TitleCategory)
+    public async Task<IEnumerable<Inventory>> ListByCategoryTitleAsync(string TitleCategory)
     {
-        throw new NotImplementedException();
+        return await _inventoryRepository.FindByCategoryTitleAsync(TitleCategory);
     }
 
-    public Task<IEnumerable<Inventory>> ListByProductTitleAsync(string TitleCategory)
+    public async Task<IEnumerable<Inventory>> ListByProductTitleAsync(string TitleProduct)
     {
-        throw new NotImplementedException();
+        return await _inventoryRepository.FindByProductTitleAsync(TitleProduct);
     }
 
-    public Task<InventoryResponse> SaveAsync(Inventory inventory)
+    public async Task<InventoryResponse> SaveAsync(Inventory inventory)
     {
-        throw new NotImplementedException();
+        try
+        {
+            await _inventoryRepository.AddAsync(inventory);
+            await _unitOfWork.CompleteAsync();
+            return new InventoryResponse(inventory);
+        }
+        catch (Exception e)
+        {
+            return new InventoryResponse($"An error ocurred while saving the inventory: {e.Message}");
+        }
     }
 
-    public Task<InventoryResponse> UpdateAsync(int inventoryId, Inventory inventory)
+    public async Task<InventoryResponse> UpdateAsync(int inventoryId, Inventory inventory)
     {
-        throw new NotImplementedException();
+        var existingInventory = await _inventoryRepository.FindByInventoryIdAsync(inventoryId);
+        if (existingInventory == null)
+            return new InventoryResponse("inventory no found");
+        try
+        {
+            _inventoryRepository.Update(inventory);
+            await _unitOfWork.CompleteAsync();
+            return new InventoryResponse(inventory);
+        }
+        catch (Exception e)
+        {
+            return new InventoryResponse($"An error ocurred while updating the inventory: {e.Message}");
+        }
     }
 
-    public Task<InventoryResponse> DeleteAsync(int inventoryId)
+    public async Task<InventoryResponse> DeleteAsync(int inventoryId)
     {
-        throw new NotImplementedException();
+        var existingInventory = await _inventoryRepository.FindByInventoryIdAsync(inventoryId);
+        if (existingInventory == null)
+            return new InventoryResponse("inventory no found");
+        try
+        {
+            _inventoryRepository.Remove(existingInventory);
+            await _unitOfWork.CompleteAsync();
+            return new InventoryResponse(existingInventory);
+        }
+        catch (Exception e)
+        {
+            return new InventoryResponse($"An error ocurred while updating the inventory: {e.Message}");
+        }
     }
 }
