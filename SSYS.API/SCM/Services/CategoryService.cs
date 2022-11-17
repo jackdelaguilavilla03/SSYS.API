@@ -22,10 +22,17 @@ public class CategoryService: ICategoryService
         return await _categoryRepository.ListAsync();
     }
 
+<<<<<<< Updated upstream
     //public async Task<IEnumerable<Category>> ListByCategoryIdAsync(int id)
 //    {
         //return await _categoryRepository.ListByCategoryIdAsync(id);
   //  }
+=======
+    public async Task<Category> FindByCategoryIdAsync(int id)
+    {
+        return await _categoryRepository.FindByIdAsync(id);
+    }
+>>>>>>> Stashed changes
 
     public async Task<CategoryResponse> SaveAsync(Category category)
     {
@@ -35,7 +42,7 @@ public class CategoryService: ICategoryService
 
         var existingTutorialWithTitle = await _categoryRepository.FindByCategoryTitleAsync(category.Title);
 
-        if (existingTutorialWithTitle != null)
+        if (existingTutorialWithTitle == null)
             return new CategoryResponse("El nombre de la categoria ya existe");
         
         // Perform Adding
@@ -103,6 +110,7 @@ public class CategoryService: ICategoryService
         }
     }
 
+<<<<<<< Updated upstream
     public async Task<IEnumerable<Category>> FindByCategoryTitleAsync(string title)
     {
         return await _categoryRepository.FindByCategoryTitleAsync(title);
@@ -112,4 +120,6 @@ public class CategoryService: ICategoryService
 //    {
   //      return await _categoryRepository.FindByCategoryIdAsync(id);
     //}
+=======
+>>>>>>> Stashed changes
 }
