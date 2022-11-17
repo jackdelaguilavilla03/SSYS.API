@@ -84,8 +84,8 @@ public class AppDbContext : DbContext
         builder.Entity<SaleOrder>().HasKey(p => p.Id);
         builder.Entity<SaleOrder>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
         builder.Entity<SaleOrder>().Property(p => p.MethodOfPayment).IsRequired();
-        builder.Entity<SaleOrder>().Property(p => p.Category).IsRequired();
-        builder.Entity<SaleOrder>().Property(p => p.Product).IsRequired();
+        builder.Entity<SaleOrder>().HasOne(p => p.Category).WithMany();
+        builder.Entity<SaleOrder>().HasOne(p => p.Product).WithMany();
         builder.Entity<SaleOrder>().Property(p => p.Amount).IsRequired().HasMaxLength(4);
         
         // Apply Snake Case Naming Convention
