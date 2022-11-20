@@ -9,6 +9,7 @@ public class ProfileService : IProfileService
 {
     private readonly IProfileRepository _profileRepository;
     private readonly IUnitOfWork _unitOfWork;
+    private readonly 
 
     public ProfileService(IProfileRepository profileRepository, IUnitOfWork unitOfWork)
     {
@@ -21,7 +22,7 @@ public class ProfileService : IProfileService
         return await _profileRepository.ListAsync();
     }
 
-    public async Task<ProfileResponse> SaveAsync(Domain.Model.Entities.Profile profile)
+    public async Task<ProfileResponse> SaveAsync(Domain.Model.Entities.Profile profile, int userId)
     {
         try
         {

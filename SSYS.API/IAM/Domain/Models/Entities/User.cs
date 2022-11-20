@@ -11,5 +11,7 @@ public class User
     public string Username { get; set; }
     [JsonIgnore]
     public string PasswordHash { get; set; }
+    
+    public Profile.Domain.Model.Entities.Profile Profile { get; set; }
 
 }
