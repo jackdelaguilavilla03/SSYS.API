@@ -68,7 +68,7 @@ public class AppDbContext : DbContext
         builder.Entity<Employee>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
         builder.Entity<Employee>().Property(p => p.Name).IsRequired().HasMaxLength(30);
         builder.Entity<Employee>().Property(p => p.LastName).IsRequired().HasMaxLength(30);
-        builder.Entity<Employee>().Property(p => p.Phone).IsRequired().HasMaxLength(9);
+        builder.Entity<Employee>().Property(p => p.Phone).IsRequired();
         
         //Customer
         builder.Entity<Customer>().ToTable("Customers");
