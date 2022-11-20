@@ -32,7 +32,7 @@ public class ProfileService : IProfileService
 
         if (existingUser == null)
         {
-            return new ProfileResponse("Error 404, user not found.");
+            return new ProfileResponse($"Error 404, user with id {existingUser.Id} not found.");
             
         }
 
