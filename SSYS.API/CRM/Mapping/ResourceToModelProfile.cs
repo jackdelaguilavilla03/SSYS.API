@@ -9,5 +9,6 @@ public class ResourceToModelProfile : AutoMapper.Profile
     public ResourceToModelProfile()
     {
         CreateMap<SaveCustomerResource, Customer>();
+        CreateMap<SaveSaleOrderResource, SaleOrder>();
     }
 }
