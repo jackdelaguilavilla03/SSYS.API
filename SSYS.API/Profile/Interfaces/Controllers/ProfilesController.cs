@@ -26,15 +26,15 @@ public class ProfilesController : ControllerBase
         return resources;
     }
     
-    [HttpPost]
-    public async Task<IActionResult> PostAsync([FromBody] SaveProfileResource resource)
+    [HttpPost("user/{userId}")]
+    public async Task<IActionResult> PostAsync(int userId, [FromBody] SaveProfileResource resource)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
 
         var profile = _mapper.Map<SaveProfileResource, Domain.Model.Entities.Profile>(resource);
 
-        var result = await _profileService.SaveAsync(profile);
+        var result = await _profileService.SaveAsync(profile, userId);
 
         if (!result.Success)
             return BadRequest(result.Message);

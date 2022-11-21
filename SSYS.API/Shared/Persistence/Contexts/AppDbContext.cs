@@ -37,6 +37,12 @@ public class AppDbContext : DbContext
         builder.Entity<User>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
         builder.Entity<User>().Property(p => p.Username).IsRequired().HasMaxLength(100);
         
+        // With profile
+        builder.Entity<User>()
+            .HasOne(u => u.Profile)
+            .WithOne(p => p.User)
+            .HasForeignKey<Profile.Domain.Model.Entities.Profile>(p => p.UserId);
+        
         // Profiles
         builder.Entity<Profile.Domain.Model.Entities.Profile>().ToTable("Profiles");
         builder.Entity<Profile.Domain.Model.Entities.Profile>().HasKey(p => p.Id);
