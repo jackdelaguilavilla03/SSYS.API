@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="32e5685a-3a86-4ad0-99bd-847a7cfa9bd1" name="Breydi" url="">
+        <fileTransfer host="win5076.site4now.net" port="21">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+      <webServer id="4a16d2b0-6fcd-48ba-9754-55ba67d5bb23" name="sd" url="https://win5076.site4now.net:8172/MsDeploy.axd?site=xxprofetxx-001-site1">
+        <fileTransfer host="win5076.site4now.net" port="21">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

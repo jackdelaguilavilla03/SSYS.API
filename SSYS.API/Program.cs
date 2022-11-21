@@ -19,6 +19,9 @@ using SSYS.API.Profile.Domain.Services;
 using SSYS.API.Profile.Persistence.Repositories;
 using SSYS.API.Profile.Services;
 using SSYS.API.SCM.Domain.Repositories;
+using SSYS.API.SCM.Domain.Services;
+using SSYS.API.SCM.Persistence;
+using SSYS.API.SCM.Services;
 using SSYS.API.Shared.Domain.Repositories;
 using SSYS.API.Shared.Persistence.Contexts;
 using SSYS.API.Shared.Persistence.Repositories;
@@ -55,6 +58,10 @@ builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 builder.Services.AddScoped<IProfileRepository, ProfileRespository>();
 builder.Services.AddScoped<IProfileService, ProfileService>();
 
+// SCM Bounded Context Dependency Injection
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IProductService, ProductService>();
+
 // Security Bounded Context Dependency Injection Configuration
 builder.Services.AddScoped<IJwtHandler, JwtHandler>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
@@ -69,7 +76,9 @@ builder.Services.AddAutoMapper(
     typeof(SSYS.API.HCM.Mapping.ModelToResourceProfile),
     typeof(SSYS.API.HCM.Mapping.ResourceToModelProfile),
     typeof(SSYS.API.Profile.Mapping.ModelToResourceProfile),
-    typeof(SSYS.API.Profile.Mapping.ResourceToModelProfile));
+    typeof(SSYS.API.Profile.Mapping.ResourceToModelProfile),
+    typeof(SSYS.API.SCM.Mapping.ModelToResourceProduct),
+    typeof(SSYS.API.SCM.Mapping.ResourceToModelProduct));
 
 // Swagger Configuration
 builder.Services.AddSwaggerGen(options =>

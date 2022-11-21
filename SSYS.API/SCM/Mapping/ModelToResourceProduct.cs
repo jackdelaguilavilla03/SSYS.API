@@ -8,7 +8,7 @@ public class ModelToResourceProduct: AutoMapper.Profile
 {
     public ModelToResourceProduct()
     {
+        //CreateMap<Product, ProductResource>();
         CreateMap<Product, ProductResource>();
-        
     }
 }

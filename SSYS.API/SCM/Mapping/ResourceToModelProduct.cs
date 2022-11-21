@@ -8,6 +8,7 @@ public class ResourceToModelProduct: AutoMapper.Profile
 {
     public ResourceToModelProduct()
     {
+        //CreateMap<SaveProductResource, Product>();
         CreateMap<SaveProductResource, Product>();
     }
 }

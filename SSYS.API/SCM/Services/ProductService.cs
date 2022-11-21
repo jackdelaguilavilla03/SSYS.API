@@ -22,11 +22,6 @@ public class ProductService: IProductService
         return await _productRepository.ListAsync();
     }
 
-    public Task<IEnumerable<Product>> ListByCategoryIdAsync(int product)
-    {
-        throw new NotImplementedException();
-    }
-
     public async Task<ProductResponse> SaveAsync(Product product)
     {
         try
@@ -52,7 +47,7 @@ public class ProductService: IProductService
         existingProduct.Title = product.Title;
         existingProduct.Amount = product.Amount;
         existingProduct.Price = product.Price;
-        existingProduct.IdCategory = product.IdCategory;
+        
         try
         {
             _productRepository.Update(existingProduct);

@@ -1,4 +1,4 @@
-﻿using System.Data.Entity;
+﻿using Microsoft.EntityFrameworkCore;
 using SSYS.API.SCM.Domain.Models;
 using SSYS.API.SCM.Domain.Repositories;
 using SSYS.API.Shared.Persistence.Contexts;
@@ -8,15 +8,11 @@ namespace SSYS.API.SCM.Persistence;
 
 public class ProductRepository: BaseRepository, IProductRepository
 {
-    public ProductRepository(AppDbContext context) : base(context)
-    {
-    }
+
 
     public async Task<IEnumerable<Product>> ListAsync()
     {
-        return await _context.Products
-            .Include(p=>p.Title)
-            .ToListAsync();
+        return await _context.Products.ToListAsync();
     }
 
     public async Task AddAsync(Product product)
@@ -26,17 +22,7 @@ public class ProductRepository: BaseRepository, IProductRepository
 
     public async Task<Product> FindByIdAsync(int id)
     {
-        return await _context.Products
-            .Include(p => p.Title)
-            .FirstOrDefaultAsync(p => p.Id == id);
-    }
-
-    public async Task<IEnumerable<Product>> FindByProductPriceAsync(int price)
-    {
-        return await _context.Products
-            .Where(p=>p.Price==price)
-            .Include(p=>p.Title)
-            .ToListAsync();
+        return await _context.Products.FindAsync(id);
     }
     
     public void Update(Product product)
@@ -47,5 +33,9 @@ public class ProductRepository: BaseRepository, IProductRepository
     public void Remove(Product product)
     {
         _context.Products.Remove(product);
+    }
+
+    public ProductRepository(AppDbContext context) : base(context)
+    {
     }
 }

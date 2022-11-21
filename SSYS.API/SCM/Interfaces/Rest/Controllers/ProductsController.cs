@@ -9,7 +9,6 @@ namespace SSYS.API.SCM.Interfaces.Rest.Controllers;
 
 [ApiController]
 [Route("/api/v1/[controller]")]
-[Produces(MediaTypeNames.Application.Json)]
 public class ProductsController : ControllerBase
 {
    private readonly IProductService _productService;
@@ -24,6 +23,7 @@ public class ProductsController : ControllerBase
    public async Task<IEnumerable<ProductResource>> GetAllAsync()
    {
       var product= await _productService.ListAsync();
+      //var resources = _mapper.Map<IEnumerable<Product>, IEnumerable<ProductResource>>(product);
       var resources = _mapper.Map<IEnumerable<Product>, IEnumerable<ProductResource>>(product);
       return resources;
    }
@@ -34,6 +34,7 @@ public class ProductsController : ControllerBase
       if (!ModelState.IsValid)
          return BadRequest(ModelState);//error
 
+      //var product = _mapper.Map<SaveProductResource, Product>(resource);
       var product = _mapper.Map<SaveProductResource, Product>(resource);
 
       var result = await _productService.SaveAsync(product);
@@ -41,8 +42,9 @@ public class ProductsController : ControllerBase
       if (!result.Success)
          return BadRequest(result.Message);
 
+      //var productResource = _mapper.Map<Product, ProductResource>(result.Resource);
       var productResource = _mapper.Map<Product, ProductResource>(result.Resource);
-
+      
       return Created(nameof(PostAsync), productResource);
    }
   
@@ -52,6 +54,7 @@ public class ProductsController : ControllerBase
       if (!ModelState.IsValid)
          return BadRequest(ModelState);//error
 
+      //var product = _mapper.Map<SaveProductResource, Product>(resource);
       var product = _mapper.Map<SaveProductResource, Product>(resource);
 
       var result = await _productService.UpdateAsync(id,product);
@@ -59,6 +62,7 @@ public class ProductsController : ControllerBase
       if (!result.Success)
          return BadRequest(result.Message);
 
+      //var productResource = _mapper.Map<Product, ProductResource>(result.Resource);
       var productResource = _mapper.Map<Product, ProductResource>(result.Resource);
 
       return Ok(productResource);
@@ -72,6 +76,7 @@ public class ProductsController : ControllerBase
       if (!result.Success)
          return BadRequest(result.Message);
 
+      //var productResource = _mapper.Map<Product, ProductResource>(result.Resource);
       var productResource = _mapper.Map<Product, ProductResource>(result.Resource);
 
       return Ok(productResource);

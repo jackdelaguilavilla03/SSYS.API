@@ -6,6 +6,4 @@ public class ProductResource
     public string Title { get; set; }
     public int Amount { get; set; }
     public int Price { get; set; }
-    public string Date { get; set; }
-    public int IdCategory { get; set; }
 }
