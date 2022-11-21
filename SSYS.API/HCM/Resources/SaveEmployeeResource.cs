@@ -14,8 +14,5 @@ public class SaveEmployeeResource
     [MinLength(2)]
     public string LastName { get; set; }
     
-    [Required]
-    [MaxLength(9)]
-    [MinLength(9)]
     public int Phone { get; set; }
 }

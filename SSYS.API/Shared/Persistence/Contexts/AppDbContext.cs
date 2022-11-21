@@ -25,6 +25,7 @@ public class AppDbContext : DbContext
     public Microsoft.EntityFrameworkCore.DbSet<Profile.Domain.Model.Entities.Profile> Profiles { get; set; }
 
     public Microsoft.EntityFrameworkCore.DbSet<Customer> Customers { get; set; }
+    public Microsoft.EntityFrameworkCore.DbSet<SaleOrder> SaleOrders { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
@@ -35,6 +36,12 @@ public class AppDbContext : DbContext
         builder.Entity<User>().HasKey(p => p.Id);
         builder.Entity<User>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
         builder.Entity<User>().Property(p => p.Username).IsRequired().HasMaxLength(100);
+        
+        // With profile
+        builder.Entity<User>()
+            .HasOne(u => u.Profile)
+            .WithOne(p => p.User)
+            .HasForeignKey<Profile.Domain.Model.Entities.Profile>(p => p.UserId);
         
         // Profiles
         builder.Entity<Profile.Domain.Model.Entities.Profile>().ToTable("Profiles");
@@ -67,7 +74,7 @@ public class AppDbContext : DbContext
         builder.Entity<Employee>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
         builder.Entity<Employee>().Property(p => p.Name).IsRequired().HasMaxLength(30);
         builder.Entity<Employee>().Property(p => p.LastName).IsRequired().HasMaxLength(30);
-        builder.Entity<Employee>().Property(p => p.Phone).IsRequired().HasMaxLength(9);
+        builder.Entity<Employee>().Property(p => p.Phone).IsRequired();
         
         //Customer
         builder.Entity<Customer>().ToTable("Customers");
@@ -78,9 +85,19 @@ public class AppDbContext : DbContext
         builder.Entity<Customer>().Property(p => p.Email).IsRequired().HasMaxLength(40);
         builder.Entity<Customer>().Property(p => p.Phone).IsRequired().HasMaxLength(9);
         
+        //SaleOrder
+        builder.Entity<SaleOrder>().ToTable("SalesOrder");
+        builder.Entity<SaleOrder>().HasKey(p => p.Id);
+        builder.Entity<SaleOrder>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
+        builder.Entity<SaleOrder>().Property(p => p.MethodOfPayment).IsRequired();
+        builder.Entity<SaleOrder>().HasOne(p => p.Category).WithMany();
+        builder.Entity<SaleOrder>().HasOne(p => p.Product).WithMany();
+        builder.Entity<SaleOrder>().Property(p => p.Amount).IsRequired().HasMaxLength(4);
+        
         // Apply Snake Case Naming Convention
         
         builder.UseSnakeCaseNamingConvention();
+        
     }
 
 }

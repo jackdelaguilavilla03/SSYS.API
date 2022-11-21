@@ -36,7 +36,7 @@ public class CategoryService: ICategoryService
         var existingTutorialWithTitle = await _categoryRepository.FindByCategoryTitleAsync(category.Title);
 
         if (existingTutorialWithTitle != null)
-            return new CategoryResponse("El nombre de la categoria ya existe");
+            return new CategoryResponse("the category name already exists");
         
         // Perform Adding
 
@@ -54,7 +54,7 @@ public class CategoryService: ICategoryService
         catch(Exception e)
         {
             // Error Handling
-            return new CategoryResponse($"Ocurrio un error mmientras se agregaba la categoria:{e.Message}");
+            return new CategoryResponse($"An error occurred while adding the category:{e.Message}");
         }
     }
 
@@ -63,7 +63,7 @@ public class CategoryService: ICategoryService
         var existingCategory = await _categoryRepository.FindByIdAsync(categoryId);
 
         if (existingCategory == null)
-            return new CategoryResponse("El ID de la categoría no existe");
+            return new CategoryResponse("Category ID does not exist");
 
         // Modify Fields
 
@@ -82,7 +82,7 @@ public class CategoryService: ICategoryService
         catch (Exception e)
         {
             // Error Handling
-            return new CategoryResponse($"Ocurrio un error mientras se actualizaba la categoría:  {e.Message}");
+            return new CategoryResponse($"An error occurred while updating the category: {e.Message}");
         }
     }
 
@@ -90,7 +90,7 @@ public class CategoryService: ICategoryService
     {
         var exitingCategory = await _categoryRepository.FindByIdAsync(categoryId);
         if (exitingCategory == null)
-            return new CategoryResponse("La categoría no existe");
+            return new CategoryResponse("The category does not exist");
         try
         {
             _categoryRepository.Remove((exitingCategory));
@@ -99,7 +99,7 @@ public class CategoryService: ICategoryService
         }
         catch (Exception e)
         {
-            return new CategoryResponse($"Ocurrio un error mientras se elimanaba la categoria: {e.Message}");
+            return new CategoryResponse($"An error occurred while deleting the category: {e.Message}");
         }
     }
 

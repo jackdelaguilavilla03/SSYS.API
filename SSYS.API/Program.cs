@@ -11,6 +11,7 @@ using SSYS.API.IAM.Authorization.Middleware;
 using SSYS.API.IAM.Authorization.Settings;
 using SSYS.API.IAM.Domain.Repositories;
 using SSYS.API.IAM.Domain.Services;
+using SSYS.API.IAM.Interfaces.Internal;
 using SSYS.API.IAM.Persistence.Repositories;
 using SSYS.API.IAM.Services;
 using SSYS.API.Profile.Domain.Repositories;
@@ -58,6 +59,7 @@ builder.Services.AddScoped<IProfileService, ProfileService>();
 builder.Services.AddScoped<IJwtHandler, JwtHandler>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IUserContextFacade, UserContextFacade>();
 
 // AutoMapper Configuration
 

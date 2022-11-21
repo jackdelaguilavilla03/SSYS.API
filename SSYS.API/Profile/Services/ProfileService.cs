@@ -1,4 +1,6 @@
-﻿using SSYS.API.Profile.Domain.Repositories;
+﻿using SSYS.API.IAM.Domain.Models.Entities;
+using SSYS.API.IAM.Interfaces.Internal;
+using SSYS.API.Profile.Domain.Repositories;
 using SSYS.API.Profile.Domain.Services;
 using SSYS.API.Profile.Domain.Services.Communication;
 using SSYS.API.Shared.Domain.Repositories;
@@ -9,11 +11,13 @@ public class ProfileService : IProfileService
 {
     private readonly IProfileRepository _profileRepository;
     private readonly IUnitOfWork _unitOfWork;
+    private readonly IUserContextFacade _userContextFacade;
 
-    public ProfileService(IProfileRepository profileRepository, IUnitOfWork unitOfWork)
+    public ProfileService(IProfileRepository profileRepository, IUnitOfWork unitOfWork, IUserContextFacade userContextFacade)
     {
         _profileRepository = profileRepository;
         _unitOfWork = unitOfWork;
+        _userContextFacade = userContextFacade;
     }
 
     public async Task<IEnumerable<Domain.Model.Entities.Profile>> ListAsync()
@@ -21,8 +25,20 @@ public class ProfileService : IProfileService
         return await _profileRepository.ListAsync();
     }
 
-    public async Task<ProfileResponse> SaveAsync(Domain.Model.Entities.Profile profile)
+    public async Task<ProfileResponse> SaveAsync(Domain.Model.Entities.Profile profile, int userId)
     {
+
+        var existingUser = _userContextFacade.getUserById(userId).Result;
+
+        if (existingUser == null)
+        {
+            return new ProfileResponse($"Error 404, user with id {existingUser.Id} not found.");
+            
+        }
+
+        profile.UserId = existingUser.Id;
+        profile.User = existingUser;
+        
         try
         {
             await _profileRepository.AddAsync(profile);
