@@ -9,6 +9,7 @@ public interface ISupplierRepository
     Task<Supplier> FindByIdAsync(int id);
     void Update(Supplier supplier);
     void Remove(Supplier supplier);
-    Task<IEnumerable<Supplier>> FindBySupplierRuc(int ruc);
-    
+    Task<Supplier> FindBySupplierRuc(int ruc);
+    Task<Supplier> FindBySupplierName(string name);
+
 }

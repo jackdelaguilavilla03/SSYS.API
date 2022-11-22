@@ -9,6 +9,6 @@ public interface IPurchaseOrderRepository
     Task<PurchaseOrder> FindByIdAsync(int id);
     void Update(PurchaseOrder purchaseOrder);
     void Remove(PurchaseOrder purchaseOrder);
-    Task<IEnumerable<PurchaseOrder>> FindByPurchaseOrderDateTime(DateTime dateTime);
+    Task<IEnumerable<PurchaseOrder>> FindByPurchaseOrderDateTime(DateTime start, DateTime end);
     Task<IEnumerable<PurchaseOrder>> FindByPurchaseOrderSupplierId(int supplierId);
 }

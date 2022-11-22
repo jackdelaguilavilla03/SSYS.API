@@ -20,6 +20,9 @@ public class AppDbContext : DbContext
     public Microsoft.EntityFrameworkCore.DbSet<Product> Products { get; set; }//1
     public Microsoft.EntityFrameworkCore.DbSet<Category> Categories { get; set; }//2
     
+    public Microsoft.EntityFrameworkCore.DbSet<Supplier> Suppliers { get; set; }
+
+    public Microsoft.EntityFrameworkCore.DbSet<PurchaseOrder> PurchaseOrders { get; set; }
     public Microsoft.EntityFrameworkCore.DbSet<Employee> Employees { get; set; }//2
     
     public Microsoft.EntityFrameworkCore.DbSet<Profile.Domain.Model.Entities.Profile> Profiles { get; set; }
@@ -67,6 +70,23 @@ public class AppDbContext : DbContext
         builder.Entity<Category>().Property(c => c.Id).IsRequired();
         builder.Entity<Category>().Property(c => c.Title).IsRequired();
         builder.Entity<Category>().Property(c => c.Description);
+        
+        //Supplier
+        builder.Entity<Supplier>().ToTable("Suppliers");
+        builder.Entity<Supplier>().HasKey(c=>c.Id);
+        builder.Entity<Supplier>().Property(c => c.Id).IsRequired();
+        builder.Entity<Supplier>().Property(c => c.Name).IsRequired();
+        builder.Entity<Supplier>().Property(c => c.Ruc).IsRequired();
+        builder.Entity<Supplier>().Property(c => c.Address);
+        builder.Entity<Supplier>().Property(c => c.Phone);
+        builder.Entity<Supplier>().Property(c => c.Email);
+        
+        //PurchaseOrder
+        builder.Entity<PurchaseOrder>().ToTable("PurchaseOrders");
+        builder.Entity<PurchaseOrder>().HasKey(c=>c.Id);
+        builder.Entity<PurchaseOrder>().Property(c => c.Id).IsRequired();
+        builder.Entity<PurchaseOrder>().Property(c => c.SupplierId).IsRequired();
+        builder.Entity<PurchaseOrder>().Property(c => c.DateTime);
         
         //Employee
         builder.Entity<Employee>().ToTable("Employees");
