@@ -2,7 +2,7 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SSYS.API", "SSYS.API\SSYS.API.csproj", "{26D382E7-2BAF-4CE8-A4F9-9A4B82C0A745}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SSYS.API.Tests", "..\SSYS.APIS\SSYS.API.Tests\SSYS.API.Tests.csproj", "{354F95D4-4EDF-425A-A8F5-C477C92565DB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SSYS.API.Tests", "SSYS.API.Tests\SSYS.API.Tests.csproj", "{0EBEE23A-5D6B-48EB-AD6C-A69C85CFD3E7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -14,9 +14,9 @@ Global
 		{26D382E7-2BAF-4CE8-A4F9-9A4B82C0A745}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{26D382E7-2BAF-4CE8-A4F9-9A4B82C0A745}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{26D382E7-2BAF-4CE8-A4F9-9A4B82C0A745}.Release|Any CPU.Build.0 = Release|Any CPU
-		{354F95D4-4EDF-425A-A8F5-C477C92565DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{354F95D4-4EDF-425A-A8F5-C477C92565DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{354F95D4-4EDF-425A-A8F5-C477C92565DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{354F95D4-4EDF-425A-A8F5-C477C92565DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0EBEE23A-5D6B-48EB-AD6C-A69C85CFD3E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0EBEE23A-5D6B-48EB-AD6C-A69C85CFD3E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0EBEE23A-5D6B-48EB-AD6C-A69C85CFD3E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0EBEE23A-5D6B-48EB-AD6C-A69C85CFD3E7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
